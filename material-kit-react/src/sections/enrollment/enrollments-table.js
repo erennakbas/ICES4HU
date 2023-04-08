@@ -17,7 +17,7 @@ import {
 import { Scrollbar } from 'src/components/scrollbar';
 import { getInitials } from 'src/utils/get-initials';
 
-export const CustomersTable = (props) => {
+export const EnrollmentsTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -68,19 +68,19 @@ export const CustomersTable = (props) => {
                   Role
                 </TableCell>
                 <TableCell>
-                  Activeness
+                  Signed Up
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((customer) => {
-                const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
+              {items.map((enrollment) => {
+                const isSelected = selected.includes(enrollment.id);
+                const createdAt = format(enrollment.createdAt, 'dd/MM/yyyy');
 
                 return (
                   <TableRow
                     hover
-                    key={customer.id}
+                    key={enrollment.id}
                     selected={isSelected}
                   >
                     <TableCell padding="checkbox">
@@ -88,9 +88,9 @@ export const CustomersTable = (props) => {
                         checked={isSelected}
                         onChange={(event) => {
                           if (event.target.checked) {
-                            onSelectOne?.(customer.id);
+                            onSelectOne?.(enrollment.id);
                           } else {
-                            onDeselectOne?.(customer.id);
+                            onDeselectOne?.(enrollment.id);
                           }
                         }}
                       />
@@ -101,25 +101,25 @@ export const CustomersTable = (props) => {
                         direction="row"
                         spacing={2}
                       >
-                        <Avatar src={customer.avatar}>
-                          {getInitials(customer.name)}
+                        <Avatar src={enrollment.avatar}>
+                          {getInitials(enrollment.name)}
                         </Avatar>
                         <Typography variant="subtitle2">
-                          {customer.name}
+                          {enrollment.name}
                         </Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>
-                      {customer.surname}
+                      {enrollment.surname}
                     </TableCell>
                     <TableCell>
-                      {customer.email}
+                      {enrollment.email}
                     </TableCell>
                     <TableCell>
-                      {customer.role}
+                      {enrollment.role}
                     </TableCell>
                     <TableCell>
-                      {customer.isActive}
+                      {createdAt}
                     </TableCell>
                   </TableRow>
                 );
@@ -141,7 +141,7 @@ export const CustomersTable = (props) => {
   );
 };
 
-CustomersTable.propTypes = {
+EnrollmentsTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

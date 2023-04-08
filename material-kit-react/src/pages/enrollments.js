@@ -4,11 +4,13 @@ import { subDays, subHours } from 'date-fns';
 import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon';
 import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
+import CheckIcon from '@heroicons/react/24/solid/CheckIcon';
+import XmarkIcon from '@heroicons/react/24/solid/XmarkIcon';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
 import { useSelection } from 'src/hooks/use-selection';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import { CustomersTable } from 'src/sections/customer/customers-table';
-import { CustomersSearch } from 'src/sections/customer/customers-search';
+import { EnrollmentsTable } from 'src/sections/enrollment/enrollments-table';
+import { EnrollmentsSearch } from 'src/sections/enrollment/enrollments-search';
 import { applyPagination } from 'src/utils/apply-pagination';
 
 const now = new Date();
@@ -16,73 +18,48 @@ const now = new Date();
 const data = [
   {
     id: '5e887ac47eed253091be10cb',
-    address: {
-      city: 'Cleveland',
-      country: 'USA',
-      state: 'Ohio',
-      street: '2849 Fulton Street'
-    },
     avatar: '/assets/avatars/avatar-carson-darrin.png',
     createdAt: subDays(subHours(now, 7), 1).getTime(),
     email: 'carson.darrin@devias.io',
-    name: 'Carson Darrin',
-    phone: '304-428-3097'
+    name: 'Carson',
+    surname:'Darrin',
+    role:'Student',
   },
   {
     id: '5e887b209c28ac3dd97f6db5',
-    address: {
-      city: 'Atlanta',
-      country: 'USA',
-      state: 'Georgia',
-      street: '1865  Pleasant Hill Road'
-    },
     avatar: '/assets/avatars/avatar-fran-perez.png',
     createdAt: subDays(subHours(now, 1), 2).getTime(),
     email: 'fran.perez@devias.io',
     name: 'Fran Perez',
-    phone: '712-351-5711'
+    surname:'Perez',
+    role:"Instructor"
   },
   {
     id: '5e887b7602bdbc4dbb234b27',
-    address: {
-      city: 'North Canton',
-      country: 'USA',
-      state: 'Ohio',
-      street: '4894  Lakeland Park Drive'
-    },
     avatar: '/assets/avatars/avatar-jie-yan-song.png',
     createdAt: subDays(subHours(now, 4), 2).getTime(),
     email: 'jie.yan.song@devias.io',
-    name: 'Jie Yan Song',
-    phone: '770-635-2682'
+    name: 'Jie Yan',
+    surname: 'Song',
+    role:"Instructor"
   },
   {
     id: '5e86809283e28b96d2d38537',
-    address: {
-      city: 'Madrid',
-      country: 'Spain',
-      name: 'Anika Visser',
-      street: '4158  Hedge Street'
-    },
     avatar: '/assets/avatars/avatar-anika-visser.png',
     createdAt: subDays(subHours(now, 11), 2).getTime(),
     email: 'anika.visser@devias.io',
-    name: 'Anika Visser',
-    phone: '908-691-3242'
+    name: 'Anika',
+    surname:'Visser',
+    role:"Student"
   },
   {
     id: '5e86805e2bafd54f66cc95c3',
-    address: {
-      city: 'San Diego',
-      country: 'USA',
-      state: 'California',
-      street: '75247'
-    },
     avatar: '/assets/avatars/avatar-miron-vitold.png',
     createdAt: subDays(subHours(now, 7), 3).getTime(),
     email: 'miron.vitold@devias.io',
     name: 'Miron Vitold',
-    phone: '972-333-4106'
+    surname: 'Vitold',
+    role:"Instructor"
   },
   {
     id: '5e887a1fbefd7938eea9c981',
@@ -156,7 +133,7 @@ const data = [
   }
 ];
 
-const useCustomers = (page, rowsPerPage) => {
+const useEnrollments = (page, rowsPerPage) => {
   return useMemo(
     () => {
       return applyPagination(data, page, rowsPerPage);
@@ -165,21 +142,21 @@ const useCustomers = (page, rowsPerPage) => {
   );
 };
 
-const useCustomerIds = (customers) => {
+const useEnrollmentIds = (enrollments) => {
   return useMemo(
     () => {
-      return customers.map((customer) => customer.id);
+      return enrollments.map((enrollment) => enrollment.id);
     },
-    [customers]
+    [enrollments]
   );
 };
 
 const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const customers = useCustomers(page, rowsPerPage);
-  const customersIds = useCustomerIds(customers);
-  const customersSelection = useSelection(customersIds);
+  const enrollments = useEnrollments(page, rowsPerPage);
+  const enrollmentsIds = useEnrollmentIds(enrollments);
+  const enrollmentsSelection = useSelection(enrollmentsIds);
 
   const handlePageChange = useCallback(
     (event, value) => {
@@ -199,7 +176,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          Customers | Devias Kit
+          Enrollments | Devias Kit
         </title>
       </Head>
       <Box
@@ -218,61 +195,49 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Customers
+                  Enrollment Requests
                 </Typography>
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  spacing={1}
-                >
-                  <Button
-                    color="inherit"
-                    startIcon={(
-                      <SvgIcon fontSize="small">
-                        <ArrowUpOnSquareIcon />
-                      </SvgIcon>
-                    )}
-                  >
-                    Import
-                  </Button>
-                  <Button
-                    color="inherit"
-                    startIcon={(
-                      <SvgIcon fontSize="small">
-                        <ArrowDownOnSquareIcon />
-                      </SvgIcon>
-                    )}
-                  >
-                    Export
-                  </Button>
-                </Stack>
               </Stack>
-              <div>
+              <Stack spacing={1} 
+              justifyContent="space-between"  
+              direction="row">
                 <Button
+                color="success"
                   startIcon={(
                     <SvgIcon fontSize="small">
-                      <PlusIcon />
+                      <CheckIcon />
                     </SvgIcon>
                   )}
                   variant="contained"
                 >
-                  Add
+                  Accept Request
                 </Button>
-              </div>
+                <Button
+                color="error"
+                  startIcon={(
+                    <SvgIcon fontSize="small">
+                      <XmarkIcon />
+                    </SvgIcon>
+                  )}
+                  variant="contained"
+                >
+                  Reject Request
+                </Button>
+              </Stack>
             </Stack>
-            <CustomersSearch />
-            <CustomersTable
+            <EnrollmentsSearch />
+            <EnrollmentsTable
               count={data.length}
-              items={customers}
-              onDeselectAll={customersSelection.handleDeselectAll}
-              onDeselectOne={customersSelection.handleDeselectOne}
+              items={enrollments}
+              onDeselectAll={enrollmentsSelection.handleDeselectAll}
+              onDeselectOne={enrollmentsSelection.handleDeselectOne}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleRowsPerPageChange}
-              onSelectAll={customersSelection.handleSelectAll}
-              onSelectOne={customersSelection.handleSelectOne}
+              onSelectAll={enrollmentsSelection.handleSelectAll}
+              onSelectOne={enrollmentsSelection.handleSelectOne}
               page={page}
               rowsPerPage={rowsPerPage}
-              selected={customersSelection.selected}
+              selected={enrollmentsSelection.selected}
             />
           </Stack>
         </Container>

@@ -10,12 +10,10 @@ import {
 } from '@mui/material';
 
 const user = {
-  avatar: '/assets/avatars/avatar-anika-visser.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Anika Visser',
-  timezone: 'GTM-7'
+  avatar: '/assets/avatars/eren.png',
+  role:"Student",
+  name: 'Eren',
+  surname: 'Akbaş',
 };
 
 export const AccountProfile = () => (
@@ -40,19 +38,13 @@ export const AccountProfile = () => (
           gutterBottom
           variant="h5"
         >
-          {user.name}
+          {user.name} {user.surname}
         </Typography>
         <Typography
           color="text.secondary"
           variant="body2"
         >
-          {user.city} {user.country}
-        </Typography>
-        <Typography
-          color="text.secondary"
-          variant="body2"
-        >
-          {user.timezone}
+          {user.role}
         </Typography>
       </Box>
     </CardContent>

@@ -25,7 +25,7 @@ const Page = () => {
   const [method, setMethod] = useState('email');
   const formik = useFormik({
     initialValues: {
-      email: 'CSadmin',
+      email: 'CSadmin@hotmail.com',
       password: 'Password123!',
       submit: null
     },
@@ -66,6 +66,12 @@ const Page = () => {
       router.push('/');
     },
     [auth, router]
+  );
+  const handleForgotPassword = useCallback(
+    () => {
+      router.push('/forgot_password');
+    },
+    [router]
   );
 
   return (
@@ -253,9 +259,9 @@ const Page = () => {
                   fullWidth
                   size="large"
                   sx={{ mt: 3 }}
-                  onClick={handleSkip}
+                  onClick={handleForgotPassword}
                 >
-                  xxx
+                  Forgot your password?
                 </Button>
                 <Alert
                   color="primary"

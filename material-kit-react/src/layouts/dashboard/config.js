@@ -19,8 +19,17 @@ export const items = [
     )
   },
   {
-    title: 'Customers',
-    path: '/customers',
+    title: 'Enrollment Requests',
+    path: '/enrollments',
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    )
+  },
+  {
+    title: 'Manage Accounts',
+    path: '/accounts',
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />
@@ -30,6 +39,15 @@ export const items = [
   {
     title: 'Companies',
     path: '/companies',
+    icon: (
+      <SvgIcon fontSize="small">
+        <ShoppingBagIcon />
+      </SvgIcon>
+    )
+  },
+  {
+    title: 'Courses',
+    path: '/courses',
     icon: (
       <SvgIcon fontSize="small">
         <ShoppingBagIcon />
