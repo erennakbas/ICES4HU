@@ -58,19 +58,7 @@ const Page = () => (
             You either tried some shady route or you came here by mistake.
             Whichever it is, try using the navigation
           </Typography>
-          <Button
-            component={NextLink}
-            href="/"
-            startIcon={(
-              <SvgIcon fontSize="small">
-                <ArrowLeftIcon />
-              </SvgIcon>
-            )}
-            sx={{ mt: 3 }}
-            variant="contained"
-          >
-            Go back to dashboard
-          </Button>
+
         </Box>
       </Container>
     </Box>

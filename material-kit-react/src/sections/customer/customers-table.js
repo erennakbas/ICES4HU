@@ -68,7 +68,7 @@ export const CustomersTable = (props) => {
                   Role
                 </TableCell>
                 <TableCell>
-                  Activeness
+                  Status
                 </TableCell>
               </TableRow>
             </TableHead>
