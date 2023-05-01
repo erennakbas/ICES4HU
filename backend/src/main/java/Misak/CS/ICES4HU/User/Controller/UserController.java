@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,14 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping(path="/api")
 public class UserController {
+
+    @Autowired
     private UserService userService;
+
+    @Bean
+    public void initUsers(){
+        userService.initUsers();
+    }
     @GetMapping(path="/users")
     public ResponseEntity<List<UserEntity>> getUsers(){
         return ResponseEntity.ok(userService.getUsers());

@@ -13,4 +13,5 @@ public class EnrollmentRequestServiceImpl implements EnrollmentRequestService {
     public EnrollmentRequestEntity createEnrollment(EnrollmentRequestEntity enrollmentRequest){
         return repository.save(enrollmentRequest);
     }
+
 }

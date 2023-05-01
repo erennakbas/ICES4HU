@@ -1,0 +1,45 @@
+[
+    {
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "adminadminmisakics@protonmail.com" ,
+      "password": "admin123",
+      "role": "ADMIN"
+    },
+    {
+      "firstName": "Ahmet Eren",
+      "lastName": "Akbas",
+      "email": "ahmeterenakbas@protonmail.com" ,
+      "password": "123123123",
+      "role": "STUDENT"
+    },
+    {
+      "firstName": "Hasim Zafer",
+      "lastName": "Cicek",
+      "email": "hasimzafercicek@proton.me" ,
+      "password": "123123123",
+      "role": "STUDENT"
+    },
+    {
+      "firstName": "Ibrahim",
+      "lastName": "Kose",
+      "email": "ibrahimkosehucs@protonmail.com" ,
+      "password": "123123123",
+      "role": "INSTRUCTOR"
+    },
+    {
+      "firstName": "Halil",
+      "lastName": "Bulke",
+      "email": "halilbulke@proton.me" ,
+      "password": "123123123",
+      "role": "DEPARTMENT_MANAGER"
+    },
+    {
+      "firstName": "Suleyman",
+      "lastName": "Yilmaz",
+      "email": "suleymanyilmazhucs@proton.me" ,
+      "password": "123123123",
+      "role": "DEPARTMENT_MANAGER"
+    }
+]
+

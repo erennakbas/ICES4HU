@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserService {
    List<UserEntity> getUsers();
    UserEntity saveUser(UserEntity user);
+   void initUsers();
 }
