@@ -10,17 +10,17 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-
 const Page = () => {
+  
   const router = useRouter();
   const auth = useAuth();
   const formik = useFormik({
     initialValues: {
-      email: '',
       firstName: '',
       lastName:'',
+      email: '',
       password: '',
-      role:"Student",
+      role:"STUDENT",
       submit: null
     },
     validationSchema: Yup.object({
@@ -47,8 +47,7 @@ const Page = () => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signUp(values.email, values.firstName, values.password);
-        router.push('/');
+        await auth.signUp(values, router);
       } catch (err) {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
@@ -114,7 +113,7 @@ const Page = () => {
                   fullWidth
                   helperText={formik.touched.firstName && formik.errors.firstName}
                   label="First Name"
-                  name="firstname"
+                  name="firstName"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.firstName}
@@ -124,17 +123,17 @@ const Page = () => {
                   fullWidth
                   helperText={formik.touched.lastName && formik.errors.lastName}
                   label="Last Name"
-                  name="lastname"
+                  name="lastName"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  value={formik.values.firstName}
+                  value={formik.values.lastName}
                 />
                 <TextField
                   error={!!(formik.touched.email && formik.errors.email)}
                   fullWidth
                   helperText={formik.touched.email && formik.errors.email}
                   label="Email Address"
-                  firstName="email"
+                  name="email"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   type="email"
@@ -145,7 +144,7 @@ const Page = () => {
                   fullWidth
                   helperText={formik.touched.password && formik.errors.password}
                   label="Password"
-                  firstName="password"
+                  name="password"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   type="password"
@@ -159,12 +158,12 @@ const Page = () => {
                   id="select-role-id"
                   value={formik.values.role}
                   label="Role"
-                  firstName="Role"
+                  name="role"
                   onChange={formik.handleChange}
                 >
                 
-                  <MenuItem value={"Student"}>Student</MenuItem>
-                  <MenuItem value={"Instructor"}>Instructor</MenuItem>
+                  <MenuItem value={"STUDENT"}>Student</MenuItem>
+                  <MenuItem value={"INSTRUCTOR"}>Instructor</MenuItem>
                 </Select>
                 </FormControl>
               </Stack>
