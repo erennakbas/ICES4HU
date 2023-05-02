@@ -25,6 +25,7 @@ public class EnrollmentRequestServiceImpl implements EnrollmentRequestService {
         newUser.setEmail(enrollmentRequest.getEmail());
         newUser.setPassword(enrollmentRequest.getPassword());
         newUser.setRole(enrollmentRequest.getRole());
+        newUser.setSchoolId(enrollmentRequest.getSchoolId());
 
         // save new user
         userRepository.save(newUser);
