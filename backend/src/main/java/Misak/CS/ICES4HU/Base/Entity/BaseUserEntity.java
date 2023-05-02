@@ -20,6 +20,9 @@ public class BaseUserEntity implements Serializable {
         @Column(nullable = false, unique = true)
         @GeneratedValue(strategy=GenerationType.IDENTITY)
         private Long id;
+        @Column(nullable = false, unique = true)
+        @Size(min = 8,max = 10, message = "School ID should be between 8 - 10 characters.")
+        private String schoolId;
         @Column(nullable = false)
         @Size(min= 2, message = "First name should be longer than 2 characters.")
         private String firstName;
@@ -40,6 +43,7 @@ public class BaseUserEntity implements Serializable {
         public String toString() {
                 return "BaseUserEntity{" +
                         "id=" + id +
+                        ", schoolId='" + schoolId + '\'' +
                         ", firstName='" + firstName + '\'' +
                         ", lastName='" + lastName + '\'' +
                         ", email='" + email + '\'' +

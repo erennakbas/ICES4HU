@@ -2,44 +2,52 @@
     {
       "firstName": "admin",
       "lastName": "admin",
-      "email": "adminadminmisakics@protonmail.com" ,
+      "email": "adminmisakicscs@proton.me" ,
       "password": "admin123",
-      "role": "ADMIN"
+      "role": "ADMIN",
+      "schoolId" : "11111111"
+
     },
     {
       "firstName": "Ahmet Eren",
       "lastName": "Akbas",
       "email": "ahmeterenakbas@protonmail.com" ,
       "password": "123123123",
-      "role": "STUDENT"
+      "role": "STUDENT",
+      "schoolId" : "21956763"
+
     },
     {
       "firstName": "Hasim Zafer",
       "lastName": "Cicek",
       "email": "hasimzafercicek@proton.me" ,
       "password": "123123123",
-      "role": "STUDENT"
+      "role": "STUDENT",
+      "schoolId" : "21956764"
     },
     {
       "firstName": "Ibrahim",
       "lastName": "Kose",
       "email": "ibrahimkosehucs@protonmail.com" ,
       "password": "123123123",
-      "role": "INSTRUCTOR"
+      "role": "INSTRUCTOR",
+      "schoolId" : "21956765"
     },
     {
       "firstName": "Halil",
       "lastName": "Bulke",
       "email": "halilbulke@proton.me" ,
       "password": "123123123",
-      "role": "DEPARTMENT_MANAGER"
+      "role": "DEPARTMENT_MANAGER",
+      "schoolId" : "21956766"
     },
     {
       "firstName": "Suleyman",
       "lastName": "Yilmaz",
       "email": "suleymanyilmazhucs@proton.me" ,
       "password": "123123123",
-      "role": "DEPARTMENT_MANAGER"
+      "role": "DEPARTMENT_MANAGER",
+      "schoolId" : "21956767"
     }
 ]
 

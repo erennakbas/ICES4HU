@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public UserEntity login(String email, String password){
-        UserEntity userEntity = userRepository.findUserEntityByEmail(email);
+    public UserEntity login(String schoolId, String password){
+        UserEntity userEntity = userRepository.findUserEntityBySchoolId(schoolId);
         if (userEntity != null){
             if (userEntity.getPassword().equals(password)){
                 return userEntity;

@@ -39,8 +39,8 @@ public class UserController {
     }
 
     @PostMapping(path="/login")
-    public ResponseEntity<UserEntity> login(@Valid @RequestParam String email,@Valid @RequestParam String password){
-        UserEntity userEntity = userService.login(email, password);
+    public ResponseEntity<UserEntity> login(@Valid @RequestParam String schoolId,@Valid @RequestParam String password){
+        UserEntity userEntity = userService.login(schoolId, password);
         if (userEntity != null){
             System.out.println("User logged in");
             return ResponseEntity.ok(userEntity);
