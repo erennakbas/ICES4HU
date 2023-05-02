@@ -52,6 +52,17 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    public UserEntity login(String email, String password){
+        UserEntity userEntity = userRepository.findUserEntityByEmail(email);
+        if (userEntity != null){
+            if (userEntity.getPassword().equals(password)){
+                return userEntity;
+            }
+        }
+        return null;
+    }
+
+
     //    public void deleteUser(Long id){
 //        Optional<UserEntity> userr = userRepository.findById(id);
 //        if (userr.isPresent()){
