@@ -23,10 +23,6 @@ public class EnrollmentRequestController {
 
     @PutMapping(path="/accept")
     public ResponseEntity<EnrollmentRequestEntity> acceptEnrollmentRequest(@Valid @RequestBody EnrollmentRequestEntity enrollmentRequest){
-        if(enrollmentRequest.getRole() != Role.ADMIN){
-            System.out.println("Only admin can accept enrollment requests");
-            return new ResponseEntity<>(null, HttpStatusCode.valueOf(401));
-        }
         System.out.println("Accepting enrollment request");
         EnrollmentRequestEntity returnObject= enrollmentRequestService.acceptEnrollmentRequest(enrollmentRequest);
         return new ResponseEntity<>(returnObject, HttpStatusCode.valueOf(200));
@@ -35,10 +31,6 @@ public class EnrollmentRequestController {
     // reject enrollment request
     @DeleteMapping(path="/reject")
     public ResponseEntity<EnrollmentRequestEntity> rejectEnrollmentRequest(@Valid @RequestBody EnrollmentRequestEntity enrollmentRequest){
-        if(enrollmentRequest.getRole() != Role.ADMIN){
-            System.out.println("Only admin can reject enrollment requests");
-            return new ResponseEntity<>(null, HttpStatusCode.valueOf(401));
-        }
         System.out.println("Rejecting enrollment request");
         enrollmentRequestService.rejectEnrollmentRequest(enrollmentRequest);
         return new ResponseEntity<>(null, HttpStatusCode.valueOf(200));
