@@ -4,7 +4,7 @@ import Misak.CS.ICES4HU.EnrollmentRequest.Entity.EnrollmentRequestEntity;
 
 public interface EnrollmentRequestService {
     EnrollmentRequestEntity createEnrollment(EnrollmentRequestEntity enrollmentRequest);
-    EnrollmentRequestEntity acceptEnrollmentRequest(EnrollmentRequestEntity enrollmentRequest);
-    void rejectEnrollmentRequest(EnrollmentRequestEntity enrollmentRequest);
+    void acceptEnrollmentRequest(Iterable<EnrollmentRequestEntity> enrollmentRequests);
+    void rejectEnrollmentRequest(Iterable<EnrollmentRequestEntity> enrollmentRequests);
     Iterable<EnrollmentRequestEntity> getEnrollmentRequests();
 }
