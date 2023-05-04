@@ -6,4 +6,5 @@ public interface EnrollmentRequestService {
     EnrollmentRequestEntity createEnrollment(EnrollmentRequestEntity enrollmentRequest);
     EnrollmentRequestEntity acceptEnrollmentRequest(EnrollmentRequestEntity enrollmentRequest);
     void rejectEnrollmentRequest(EnrollmentRequestEntity enrollmentRequest);
+    Iterable<EnrollmentRequestEntity> getEnrollmentRequests();
 }

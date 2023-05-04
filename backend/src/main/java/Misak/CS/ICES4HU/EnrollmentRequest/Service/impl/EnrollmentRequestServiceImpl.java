@@ -40,4 +40,7 @@ public class EnrollmentRequestServiceImpl implements EnrollmentRequestService {
         repository.delete(enrollmentRequest);
     }
 
+    public Iterable<EnrollmentRequestEntity> getEnrollmentRequests(){
+        return repository.findAll();
+    }
 }
