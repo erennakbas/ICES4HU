@@ -77,9 +77,9 @@ export const Layout = (props) => {
               }}
               variant="h1"
             >
-              Welcome to{" "}
-              <Box component="a" sx={{ color: "#15B79E" }} target="_blank">
-                ICS4HU System
+              Welcome to 
+              <Box component="a" sx={{ color: "#15B79E", ml:1}} target="_blank">
+              ICS4HU System
               </Box>
             </Typography>
             <Typography align="center" sx={{ mb: 3 }} variant="subtitle1">

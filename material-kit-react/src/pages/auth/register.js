@@ -18,6 +18,7 @@ const Page = () => {
     initialValues: {
       firstName: '',
       lastName:'',
+      schoolId:'',
       email: '',
       password: '',
       role:"STUDENT",
@@ -37,6 +38,10 @@ const Page = () => {
         .string()
         .max(255)
         .required('Last name is required'),
+      schoolId: Yup
+        .string()
+        .max(255)
+        .required('SchoolId is required'),
       password: Yup
         .string()
         .max(255)
@@ -107,7 +112,7 @@ const Page = () => {
               noValidate
               onSubmit={formik.handleSubmit}
             >
-              <Stack spacing={5}>
+              <Stack spacing={6}>
                 <TextField
                   error={!!(formik.touched.firstName && formik.errors.firstName)}
                   fullWidth
@@ -127,6 +132,16 @@ const Page = () => {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.lastName}
+                />
+                <TextField
+                  error={!!(formik.touched.schoolId && formik.errors.schoolId)}
+                  fullWidth
+                  helperText={formik.touched.schoolId && formik.errors.schoolId}
+                  label="School ID"
+                  name="schoolId"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.schoolId}
                 />
                 <TextField
                   error={!!(formik.touched.email && formik.errors.email)}
