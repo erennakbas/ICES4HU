@@ -22,7 +22,7 @@ const data = [
     avatar: '/assets/avatars/avatar-carson-darrin.png',
     createdAt: subDays(subHours(now, 7), 1).getTime(),
     email: 'carson.darrin@devias.io',
-    name: 'Carson',
+    name: 'Carl',
     surname:'Darrin',
     role:'Student',
     isActive:"Dismissed"

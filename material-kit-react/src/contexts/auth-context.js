@@ -1,5 +1,8 @@
 import { createContext, useContext, useEffect, useReducer, useRef } from 'react';
 import PropTypes from 'prop-types';
+import ConfigService from 'src/services/configService';
+import axios from 'axios';
+const configService= ConfigService();
 
 const HANDLERS = {
   INITIALIZE: 'INITIALIZE',
@@ -148,8 +151,17 @@ export const AuthProvider = (props) => {
     });
   };
 
-  const signUp = async (email, name, password) => {
-    throw new Error('Sign up is not implemented');
+  const signUp = async (signUpBody, router) => {
+    try {
+      await axios.post(`${configService.url}/enrollment_requests/signup`, signUpBody);
+      alert("We've successfully got your enrollment request!");
+      router.push("login")
+      
+    }
+    catch(err){
+      console.log(err);
+    }
+    
   };
 
   const signOut = () => {
