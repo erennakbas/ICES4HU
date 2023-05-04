@@ -59,7 +59,8 @@ public class UserServiceImpl implements UserService {
                 return userEntity;
             }
         }
-        return null;
+
+        throw new IllegalArgumentException("School Id or password is incorrect");
     }
 
 
