@@ -17,26 +17,32 @@ public class EnrollmentRequestServiceImpl implements EnrollmentRequestService {
         return repository.save(enrollmentRequest);
     }
 
-    public EnrollmentRequestEntity acceptEnrollmentRequest(EnrollmentRequestEntity enrollmentRequest){
-        // create new user from enrollment request
-        UserEntity newUser = new UserEntity();
-        newUser.setFirstName(enrollmentRequest.getFirstName());
-        newUser.setLastName(enrollmentRequest.getLastName());
-        newUser.setEmail(enrollmentRequest.getEmail());
-        newUser.setPassword(enrollmentRequest.getPassword());
-        newUser.setRole(enrollmentRequest.getRole());
+    public void acceptEnrollmentRequest(Iterable<EnrollmentRequestEntity> enrollmentRequests){
+        for(EnrollmentRequestEntity enrollmentRequest: enrollmentRequests){
+            // create new user from enrollment request
+            UserEntity newUser = new UserEntity();
+            newUser.setFirstName(enrollmentRequest.getFirstName());
+            newUser.setLastName(enrollmentRequest.getLastName());
+            newUser.setEmail(enrollmentRequest.getEmail());
+            newUser.setPassword(enrollmentRequest.getPassword());
+            newUser.setRole(enrollmentRequest.getRole());
+            newUser.setSchoolId(enrollmentRequest.getSchoolId());
 
-        // save new user
-        userRepository.save(newUser);
+            // save new user
+            userRepository.save(newUser);
 
-        // delete enrollment request
-        repository.delete(enrollmentRequest);
-
-        return enrollmentRequest;
+            repository.delete(enrollmentRequest);
+        }
     }
 
-    public void rejectEnrollmentRequest(EnrollmentRequestEntity enrollmentRequest){
-        repository.delete(enrollmentRequest);
+    public void rejectEnrollmentRequest(Iterable<EnrollmentRequestEntity> enrollmentRequests){
+        for(EnrollmentRequestEntity enrollmentRequest: enrollmentRequests){
+            repository.delete(enrollmentRequest);
+        }
     }
 
+
+    public Iterable<EnrollmentRequestEntity> getEnrollmentRequests(){
+        return repository.findAll();
+    }
 }

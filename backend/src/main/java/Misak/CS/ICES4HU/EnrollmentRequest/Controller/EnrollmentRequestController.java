@@ -22,18 +22,23 @@ public class EnrollmentRequestController {
     }
 
     @PutMapping(path="/accept")
-    public ResponseEntity<EnrollmentRequestEntity> acceptEnrollmentRequest(@Valid @RequestBody EnrollmentRequestEntity enrollmentRequest){
+    public ResponseEntity<String> acceptEnrollmentRequestList(@Valid @RequestBody Iterable<EnrollmentRequestEntity> enrollmentRequests){
         System.out.println("Accepting enrollment request");
-        EnrollmentRequestEntity returnObject= enrollmentRequestService.acceptEnrollmentRequest(enrollmentRequest);
+        enrollmentRequestService.acceptEnrollmentRequest(enrollmentRequests);
+        return new ResponseEntity<>("Enrollment Requests are succesfully accepted", HttpStatusCode.valueOf(200));
+    }
+
+    @PutMapping(path="/reject")
+    public ResponseEntity<String> rejectEnrollmentRequestList(@Valid @RequestBody Iterable<EnrollmentRequestEntity> enrollmentRequests){
+        System.out.println("Rejecting enrollment request");
+        enrollmentRequestService.rejectEnrollmentRequest(enrollmentRequests);
+        return new ResponseEntity<>("Enrollment Requests are succesfully rejected", HttpStatusCode.valueOf(200));
+    }
+
+    @GetMapping(path = "")
+    public ResponseEntity<Iterable<EnrollmentRequestEntity>> getEnrollmentRequests(){
+        System.out.println("Getting enrollment requests");
+        Iterable<EnrollmentRequestEntity> returnObject= enrollmentRequestService.getEnrollmentRequests();
         return new ResponseEntity<>(returnObject, HttpStatusCode.valueOf(200));
     }
-
-    // reject enrollment request
-    @DeleteMapping(path="/reject")
-    public ResponseEntity<EnrollmentRequestEntity> rejectEnrollmentRequest(@Valid @RequestBody EnrollmentRequestEntity enrollmentRequest){
-        System.out.println("Rejecting enrollment request");
-        enrollmentRequestService.rejectEnrollmentRequest(enrollmentRequest);
-        return new ResponseEntity<>(null, HttpStatusCode.valueOf(200));
-    }
-
 }

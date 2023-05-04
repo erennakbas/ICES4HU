@@ -32,25 +32,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public void initUsers() {
 
-        // using object mapper read json file and create userentities
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        TypeReference<List<UserEntity>> typeReference = new TypeReference<List<UserEntity>>(){};
-        try {
-            File file = ResourceUtils.getFile("classpath:tempUsers.json");
-            // convert file to string
-            String content = new String(java.nio.file.Files.readAllBytes(file.toPath()));
-
-            List<UserEntity> users = mapper.readValue(content, typeReference);
-            userRepository.saveAll(users);
-            System.out.println("Users Saved!");
-        } catch (IOException e){
-            System.out.println("Unable to save users: " + e.getMessage());
-        }
-
-    }
 
     public UserEntity login(String schoolId, String password){
         UserEntity userEntity = userRepository.findUserEntityBySchoolId(schoolId);
@@ -59,7 +41,8 @@ public class UserServiceImpl implements UserService {
                 return userEntity;
             }
         }
-        return null;
+
+        throw new IllegalArgumentException("School Id or password is incorrect");
     }
 
 
