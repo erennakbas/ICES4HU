@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,14 +46,29 @@ public class UserServiceImpl implements UserService {
         throw new IllegalArgumentException("School Id or password is incorrect");
     }
 
+    public void banUsers(List<UserEntity> users) {
+        for (UserEntity user : users) {
+            UserEntity userEntity = userRepository.findUserEntityBySchoolId(user.getSchoolId());
+            if (userEntity != null) {
+                userEntity.setBanned(true);
+            } else {
+                throw new IllegalArgumentException("School Id is incorrect for user: " + user.getFirstName());
+            }
+        }
+    }
 
-    //    public void deleteUser(Long id){
-//        Optional<UserEntity> userr = userRepository.findById(id);
-//        if (userr.isPresent()){
-//            UserEntity user = userr.get();
-//            if (user.getStatus() == UserStatus.ACTIVE){
-//                throw new Exception("silemezsin");
-//            }
-//        }
-//    }
+    public void deleteUsers(List<UserEntity> users) {
+        for (UserEntity userEntity : users) {
+            UserEntity user = userRepository.findUserEntityBySchoolId(userEntity.getSchoolId());
+            if (user != null) {
+                if (!user.getStatus().equals(UserStatus.ACTIVE)) {
+                    userRepository.delete(user);
+                } else {
+                    throw new IllegalArgumentException("User cannot be deleted as their status is ACTIVE");
+                }
+            } else {
+                throw new IllegalArgumentException("User not found");
+            }
+        }
+    }
 }

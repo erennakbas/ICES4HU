@@ -2,16 +2,10 @@ package Misak.CS.ICES4HU.User.Controller;
 
 import Misak.CS.ICES4HU.User.Entity.UserEntity;
 import Misak.CS.ICES4HU.User.Service.UserService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,4 +36,15 @@ public class UserController {
 
     }
 
+    @PutMapping(path="/users/ban")
+    public ResponseEntity<String> banUser(@RequestBody List<UserEntity> users){
+        userService.banUsers(users);
+        return ResponseEntity.ok("Users banned successfully");
+    }
+
+    @DeleteMapping(path="/users/delete")
+    public ResponseEntity<String> deleteUsers(@RequestBody List<UserEntity> users){
+        userService.deleteUsers(users);
+        return ResponseEntity.ok("Users deleted successfully");
+    }
 }
