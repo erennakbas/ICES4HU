@@ -1,0 +1,82 @@
+[
+  {
+    "firstName": "Emma",
+    "lastName": "Johnson",
+    "email": "emma.johnson@example.com",
+    "password": "SjkfsO&3s",
+    "role": "STUDENT",
+    "schoolId": "21975863"
+  },
+  {
+    "firstName": "Oliver",
+    "lastName": "Wilson",
+    "email": "oliver.wilson@example.com",
+    "password": "3klK0$ldm",
+    "role": "INSTRUCTOR",
+    "schoolId": "21956465"
+  },
+  {
+    "firstName": "Ethan",
+    "lastName": "Brown",
+    "email": "ethan.brown@example.com",
+    "password": "R09&lAsd1",
+    "role": "STUDENT",
+    "schoolId": "21958863"
+  },
+  {
+    "firstName": "Sophia",
+    "lastName": "Smith",
+    "email": "sophia.smith@example.com",
+    "password": "12Sjk@Rks",
+    "role": "STUDENT",
+    "schoolId": "21999321"
+  },
+  {
+    "firstName": "Liam",
+    "lastName": "Lee",
+    "email": "liam.lee@example.com",
+    "password": "LdKf)21!k",
+    "role": "INSTRUCTOR",
+    "schoolId": "219569872"
+  },
+  {
+    "firstName": "Ava",
+    "lastName": "Nguyen",
+    "email": "ava.nguyen@example.com",
+    "password": "19Aks%Osl",
+    "role": "STUDENT",
+    "schoolId": "225689035"
+  },
+  {
+    "firstName": "Noah",
+    "lastName": "Garcia",
+    "email": "noah.garcia@example.com",
+    "password": "Ks&L31skj",
+    "role": "INSTRUCTOR",
+    "schoolId": "22168905"
+  },
+  {
+    "firstName": "Isabella",
+    "lastName": "Davis",
+    "email": "isabella.davis@example.com",
+    "password": "s29J#laOs",
+    "role": "STUDENT",
+    "schoolId": "220502159"
+  },
+  {
+    "firstName": "William",
+    "lastName": "Martinez",
+    "email": "william.martinez@example.com",
+    "password": "Sl#k1Dl0a",
+    "role": "DEPARTMENT_MANAGER",
+    "schoolId": "21969852"
+  },
+  {
+    "firstName": "Mia",
+    "lastName": "Anderson",
+    "email": "mia.anderson@example.com",
+    "password": "LksjF@2ks",
+    "role": "STUDENT",
+    "schoolId": "21954636"
+  }
+]

@@ -25,10 +25,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Bean
-    public void initUsers(){
-        userService.initUsers();
-    }
     @GetMapping(path="/users")
     public ResponseEntity<List<UserEntity>> getUsers(){
         return ResponseEntity.ok(userService.getUsers());

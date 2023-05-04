@@ -36,9 +36,8 @@ public class EnrollmentRequestController {
         return new ResponseEntity<>(null, HttpStatusCode.valueOf(200));
     }
 
-
     // getenrollment requests endpoint
-    @GetMapping(path="/get_requests")
+    @GetMapping(path="")
     public ResponseEntity<Iterable<EnrollmentRequestEntity>> getEnrollmentRequests(){
         System.out.println("Getting enrollment requests");
         Iterable<EnrollmentRequestEntity> returnObject= enrollmentRequestService.getEnrollmentRequests();
