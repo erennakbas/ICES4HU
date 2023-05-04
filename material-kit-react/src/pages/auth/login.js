@@ -25,8 +25,8 @@ const Page = () => {
   const [method, setMethod] = useState("email");
   const formik = useFormik({
     initialValues: {
-      id: "b21945944",
-      password: "Password123!",
+      id: "",
+      password: "",
       submit: null,
     },
     //email yazılacak username yerine
@@ -101,7 +101,7 @@ const Page = () => {
                   error={!!(formik.touched.id && formik.errors.id)}
                   fullWidth
                   helperText={formik.touched.id && formik.errors.id}
-                  label="UserId"
+                  label="School ID"
                   name="id"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -131,6 +131,9 @@ const Page = () => {
               </Button>
               <Button fullWidth size="large" sx={{ mt: 3 }} onClick={handleForgotPassword}>
                 Forgot your password?
+              </Button>
+              <Button fullWidth size="large" sx={{ mt: 3 }} onClick={handleSkip}>
+                Skip authentication
               </Button>
               <Alert color="primary" severity="info" sx={{ mt: 3 }}>
                 <div>

@@ -125,15 +125,21 @@ export const AuthProvider = (props) => {
   };
   //COMMENT
   const signIn = async (id, password) => {
+    //const params = new URLSearchParams();
+    //params.append("schoolId", id);
+    //params.append("password", password);
+    //console.log(id + password);
+    const params = {
+      schoolId: id,
+      password: password,
+    };
     await axios
-      .post("https://reqres.in/api/login", {
-        email: "eve.holt@reqres.in",
-        password: "cityslicka",
-      })
+      .post("http://localhost:8082/api/login", params)
       .then(async function (response) {
-        console.log(response.data.result);
-        let result = response.data.result;
-        if (true === true) {
+        if (response !== null) {
+          console.log(response);
+          //let result = response.data.result;
+          //if (response.data !== null) {
           //<Alert variant="outlined" severity="success">
           //  This is a success alert — check it out!
           //</Alert>;
@@ -144,9 +150,12 @@ export const AuthProvider = (props) => {
           }
 
           const user = {
-            id: id,
-            name: "Anika Visser",
-            email: "anika.visser@devias.io",
+            id: response.data.id,
+            schoolId: response.data.schoolId,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            email: response.data.email,
+            role: response.data.role,
           };
 
           dispatch({
@@ -154,11 +163,12 @@ export const AuthProvider = (props) => {
             payload: user,
           });
         } else {
-          alert("giremediniz");
+          //alert("Cant Login");
         }
       })
       .catch(function (error) {
         console.log(error);
+        throw new Error("Please check your user id and password");
       });
     /*
     if (id !== "b21945944" || password !== "Password123!") {

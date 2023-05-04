@@ -79,11 +79,11 @@ export const Layout = (props) => {
             >
               Welcome to{" "}
               <Box component="a" sx={{ color: "#15B79E" }} target="_blank">
-                ICS4HU System
+                &nbsp;ICS4HU System
               </Box>
             </Typography>
             <Typography align="center" sx={{ mb: 3 }} variant="subtitle1">
-              A professional registeration system for Hacettepe University.
+              A course evaluation system for Hacettepe University.
             </Typography>
             <img alt="" src="/assets/hacettepex.png" />
           </Box>
