@@ -1,12 +1,31 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
 export const Logo = () => {
   const theme = useTheme();
   const fillColor = theme.palette.error.main;
 
   return (
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xmlSpace="preserve">  <image id="image0" width="48" height="48" x="0" y="0"
-    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+    <svg
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      width="48px"
+      height="48px"
+      viewBox="0 0 48 48"
+      enableBackground="new 0 0 48 48"
+      xmlSpace="preserve"
+    >
+      {" "}
+      <image
+        id="image0"
+        width="48"
+        height="48"
+        x="0"
+        y="0"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
     AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAB9VBMVEXiChbiChbiChbiChbi
     ChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbi
     ChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbiChbi
@@ -31,7 +50,8 @@ export const Logo = () => {
     qqoLWbjnLQKlkkVV3o6ii5NsC0x8ObhFeCYsTIhdwsAAAKpT5+28f4BUAAAAJXRFWHRkYXRlOmNy
     ZWF0ZQAyMDIzLTA0LTA3VDEzOjIxOjQ1KzAwOjAwYGxAPwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAy
     My0wNC0wN1QxMzoyMTo0NSswMDowMBEx+IMAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDQt
-    MDdUMTM6MjE6NDUrMDA6MDBGJNlcAAAAAElFTkSuQmCC" />
-</svg>
+    MDdUMTM6MjE6NDUrMDA6MDBGJNlcAAAAAElFTkSuQmCC"
+      />
+    </svg>
   );
 };
