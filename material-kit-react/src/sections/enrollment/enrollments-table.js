@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import {
   Avatar,
   Box,
@@ -12,10 +12,10 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
-import { Scrollbar } from 'src/components/scrollbar';
-import { getInitials } from 'src/utils/get-initials';
+  Typography,
+} from "@mui/material";
+import { Scrollbar } from "src/components/scrollbar";
+import { getInitials } from "src/utils/get-initials";
 
 export const EnrollmentsTable = (props) => {
   const {
@@ -29,11 +29,12 @@ export const EnrollmentsTable = (props) => {
     onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = []
+    selected = [],
   } = props;
 
-  const selectedSome = (selected.length > 0) && (selected.length < items.length);
-  const selectedAll = (items.length > 0) && (selected.length === items.length);
+  //console.log(onSelectOne);
+  const selectedSome = selected.length > 0 && selected.length < items.length;
+  const selectedAll = items.length > 0 && selected.length === items.length;
 
   return (
     <Card>
@@ -55,34 +56,20 @@ export const EnrollmentsTable = (props) => {
                     }}
                   />
                 </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Surname
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Role
-                </TableCell>
-                <TableCell>
-                  Signed Up
-                </TableCell>
+                <TableCell>first Name</TableCell>
+                <TableCell>Last name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>school ID</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((enrollment) => {
                 const isSelected = selected.includes(enrollment.id);
-                const createdAt = format(enrollment.createdAt, 'dd/MM/yyyy');
+                //const createdAt = format(enrollment.createdAt, "dd/MM/yyyy");
 
                 return (
-                  <TableRow
-                    hover
-                    key={enrollment.id}
-                    selected={isSelected}
-                  >
+                  <TableRow hover key={enrollment.id} selected={isSelected}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isSelected}
@@ -96,31 +83,16 @@ export const EnrollmentsTable = (props) => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Stack
-                        alignItems="center"
-                        direction="row"
-                        spacing={2}
-                      >
-                        <Avatar src={enrollment.avatar}>
-                          {getInitials(enrollment.name)}
-                        </Avatar>
-                        <Typography variant="subtitle2">
-                          {enrollment.name}
-                        </Typography>
+                      <Stack alignItems="center" direction="row" spacing={2}>
+                        <Avatar src={enrollment.avatar}>{getInitials(enrollment.firstName)}</Avatar>
+                        <Typography variant="subtitle2">{enrollment.firstName}</Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>
-                      {enrollment.surname}
-                    </TableCell>
-                    <TableCell>
-                      {enrollment.email}
-                    </TableCell>
-                    <TableCell>
-                      {enrollment.role}
-                    </TableCell>
-                    <TableCell>
-                      {createdAt}
-                    </TableCell>
+
+                    <TableCell>{enrollment.lastName}</TableCell>
+                    <TableCell>{enrollment.email}</TableCell>
+                    <TableCell>{enrollment.role}</TableCell>
+                    <TableCell>{enrollment.schoolId}</TableCell>
                   </TableRow>
                 );
               })}
@@ -152,5 +124,5 @@ EnrollmentsTable.propTypes = {
   onSelectOne: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
-  selected: PropTypes.array
+  selected: PropTypes.array,
 };

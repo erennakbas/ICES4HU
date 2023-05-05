@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useReducer, useRef } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import ConfigService from "src/services/configService";
+const configService = ConfigService();
 //import Alert from "@material-ui/lab/Alert";
 
 const HANDLERS = {
@@ -134,7 +136,7 @@ export const AuthProvider = (props) => {
       password: password,
     };
     await axios
-      .post("http://localhost:8082/api/login", params)
+      .post(`${configService.url}/login`, params)
       .then(async function (response) {
         if (response !== null) {
           console.log(response);
@@ -177,8 +179,14 @@ export const AuthProvider = (props) => {
 */
   };
 
-  const signUp = async (email, name, password) => {
-    throw new Error("Sign up is not implemented");
+  const signUp = async (signUpBody, router) => {
+    try {
+      await axios.post(`${configService.url}/enrollment_requests/signup`, signUpBody);
+      alert("We've successfully got your enrollment request!");
+      router.push("login");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const signOut = () => {
