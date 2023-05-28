@@ -37,6 +37,7 @@ export const AccountProfileDetails = () => {
     try{
       const response = await axios.patch(`${configService.url}/users/myself/account-details`,values);
       console.log(response);
+      alert("Account details are saved. Refresh the page to see the changes.")
     }
     catch(e){
       console.log(e);

@@ -9,13 +9,16 @@ import {
   Stack,
   TextField
 } from '@mui/material';
-
+import axios from 'axios';
+import ConfigService from 'src/services/configService';
+import { useAuth } from 'src/hooks/use-auth';
+const configService = ConfigService();
 export const SettingsPassword = () => {
   const [values, setValues] = useState({
     password: '',
-    confirm: ''
+    confirmPassword: ''
   });
-
+  const { user } = useAuth();
   const handleChange = useCallback(
     (event) => {
       setValues((prevState) => ({
@@ -26,15 +29,25 @@ export const SettingsPassword = () => {
     []
   );
 
-  const handleSubmit = useCallback(
-    (event) => {
-      event.preventDefault();
-    },
-    []
-  );
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try{
+      const response = await axios.patch(`${configService.url}/users/myself/password`,{id:user?.id, ...values});
+      console.log(response)
+      setValues({ 
+      password: '',
+      confirmPassword: ''});
+      alert("Password is saved.")
+    }
+    catch(e){
+      alert("Passwords doesn't match or illegal password.")
+      console.log(e);
+    }
+
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <Card>
         <CardHeader
           subheader="Update password"
@@ -57,17 +70,18 @@ export const SettingsPassword = () => {
             <TextField
               fullWidth
               label="Password (Confirm)"
-              name="confirm"
+              name="confirmPassword"
               onChange={handleChange}
               type="password"
-              value={values.confirm}
+              value={values.confirmPassword}
             />
           </Stack>
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button variant="contained">
-            Update
+          <Button variant="contained" 
+          onClick={handleSubmit}>
+            Update Password
           </Button>
         </CardActions>
       </Card>
