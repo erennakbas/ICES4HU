@@ -20,7 +20,6 @@ export const AccountProfile = () => {
   const handleUpload = () => {
     fileInputRef.current.click(); // Trigger click event on file input
   };
-console.log(user?.image);
   const handleFileSelect = async (event) => {
     const file = event.target.files[0];
     if(file){
@@ -30,7 +29,10 @@ console.log(user?.image);
       try{
       await axios.post(`${configService.url}/users/myself/upload-image`, formData, {
         params: {id:user?.id}});
-      console.log('Image uploaded successfully');}
+      console.log('Image uploaded successfully');
+      alert("Profile picture is successfully uploaded. Refresh the page to see the changes.");
+      }
+      
       catch(e){
         console.log('Failed to upload image:', e);
       }

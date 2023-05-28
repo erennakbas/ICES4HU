@@ -33,7 +33,7 @@ const Page = () => (
               </Grid>
             </Grid>
           </div>
-          <SettingsPassword />
+          <SettingsPassword/>
         </Stack>
           
       </Container>
