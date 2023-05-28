@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon';
 import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon';
+import { useAuth } from 'src/hooks/use-auth';
 import {
   Box,
   Button,
@@ -19,10 +20,17 @@ import { items } from './config';
 import { SideNavItem } from './side-nav-item';
 
 export const SideNav = (props) => {
+  const { user } = useAuth();
   const { open, onClose } = props;
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-
+  const checkAuthorization = (navigationLink) => {
+    console.log(user);
+    if (navigationLink.all_authorized || navigationLink.authorized_roles.includes(user?.role) ){
+      return true;
+    }
+    return false;
+  }
   const content = (
     <Scrollbar
       sx={{
@@ -108,19 +116,18 @@ University
             }}
           >
             {items.map((item) => {
-              const active = item.path ? (pathname === item.path) : false;
-
-              return (
+              console.log(item)
+              return checkAuthorization(item) ?
                 <SideNavItem
-                  active={active}
+                  active={true}
                   disabled={item.disabled}
                   external={item.external}
                   icon={item.icon}
                   key={item.title}
                   path={item.path}
                   title={item.title}
-                />
-              );
+                />:<></>
+              
             })}
           </Stack>
         </Box>

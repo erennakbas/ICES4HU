@@ -37,7 +37,8 @@ const handlers = {
   },
   [HANDLERS.SIGN_IN]: (state, action) => {
     const user = action.payload;
-
+    console.log("hayırlı işler")
+    console.log(user);
     return {
       ...state,
       isAuthenticated: true,
@@ -157,6 +158,7 @@ export const AuthProvider = (props) => {
             firstName: response.data.firstName,
             lastName: response.data.lastName,
             email: response.data.email,
+            department:response.data.department,
             role: response.data.role,
           };
 
@@ -190,6 +192,7 @@ export const AuthProvider = (props) => {
   };
 
   const signOut = () => {
+    window.sessionStorage.setItem("authenticated", "false");
     dispatch({
       type: HANDLERS.SIGN_OUT,
     });

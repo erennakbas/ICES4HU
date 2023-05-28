@@ -11,6 +11,7 @@ import { SvgIcon } from '@mui/material';
 export const items = [
   {
     title: 'Overview',
+    all_authorized:true,
     path: '/',
     icon: (
       <SvgIcon fontSize="small">
@@ -21,6 +22,7 @@ export const items = [
   {
     title: 'Enrollment Requests',
     path: '/enrollments',
+    all_authorized:false,
     authorized_roles:["ADMIN"],
     icon: (
       <SvgIcon fontSize="small">
@@ -31,6 +33,7 @@ export const items = [
   {
     title: 'Manage Users',
     path: '/users',
+    all_authorized:false,
     authorized_roles:["ADMIN"],
     icon: (
       <SvgIcon fontSize="small">
@@ -41,6 +44,7 @@ export const items = [
   {
     title: 'Courses',
     path: '/courses',
+    all_authorized:true,
     icon: (
       <SvgIcon fontSize="small">
         <ShoppingBagIcon />
@@ -50,19 +54,10 @@ export const items = [
   {
     title: 'Account',
     path: '/account',
-    authorized_roles:[],
+    all_authorized:true,
     icon: (
       <SvgIcon fontSize="small">
         <UserIcon />
-      </SvgIcon>
-    )
-  },
-  {
-    title: 'Settings',
-    path: '/settings',
-    icon: (
-      <SvgIcon fontSize="small">
-        <CogIcon />
       </SvgIcon>
     )
   }

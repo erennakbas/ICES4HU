@@ -3,6 +3,8 @@ import { Box, Container, Stack, Typography, Unstable_Grid2 as Grid } from "@mui/
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { AccountProfile } from "src/sections/account/account-profile";
 import { AccountProfileDetails } from "src/sections/account/account-profile-details";
+import { SettingsNotifications } from 'src/sections/settings/settings-notifications';
+import { SettingsPassword } from 'src/sections/settings/settings-password';
 
 const Page = () => (
   <>
@@ -17,7 +19,7 @@ const Page = () => (
       }}
     >
       <Container maxWidth="lg">
-        <Stack spacing={3}>
+        <Stack spacing={4}>
           <div>
             <Typography variant="h4">Account</Typography>
           </div>
@@ -31,7 +33,9 @@ const Page = () => (
               </Grid>
             </Grid>
           </div>
+          <SettingsPassword />
         </Stack>
+          
       </Container>
     </Box>
   </>
