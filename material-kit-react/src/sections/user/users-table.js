@@ -17,7 +17,7 @@ import {
 import { Scrollbar } from 'src/components/scrollbar';
 import { getInitials } from 'src/utils/get-initials';
 
-export const CustomersTable = (props) => {
+export const UsersTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -56,10 +56,10 @@ export const CustomersTable = (props) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Name
+                  First Name
                 </TableCell>
                 <TableCell>
-                  Surname
+                  Last Name
                 </TableCell>
                 <TableCell>
                   Email
@@ -70,17 +70,20 @@ export const CustomersTable = (props) => {
                 <TableCell>
                   Status
                 </TableCell>
+                <TableCell>
+                  School ID
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((customer) => {
-                const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
+              {items.map((user) => {
+                const isSelected = selected.includes(user.id);
+                {/* const createdAt = format(user.createdAt, 'dd/MM/yyyy'); */}
 
                 return (
                   <TableRow
                     hover
-                    key={customer.id}
+                    key={user.id}
                     selected={isSelected}
                   >
                     <TableCell padding="checkbox">
@@ -88,9 +91,9 @@ export const CustomersTable = (props) => {
                         checked={isSelected}
                         onChange={(event) => {
                           if (event.target.checked) {
-                            onSelectOne?.(customer.id);
+                            onSelectOne?.(user.id);
                           } else {
-                            onDeselectOne?.(customer.id);
+                            onDeselectOne?.(user.id);
                           }
                         }}
                       />
@@ -101,25 +104,28 @@ export const CustomersTable = (props) => {
                         direction="row"
                         spacing={2}
                       >
-                        <Avatar src={customer.avatar}>
-                          {getInitials(customer.name)}
+                        <Avatar src={user.avatar}>
+                          {getInitials(user.firstName)}
                         </Avatar>
                         <Typography variant="subtitle2">
-                          {customer.name}
+                          {user.firstName}
                         </Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>
-                      {customer.surname}
+                      {user.lastName}
                     </TableCell>
                     <TableCell>
-                      {customer.email}
+                      {user.email}
                     </TableCell>
                     <TableCell>
-                      {customer.role}
+                      {user.role}
                     </TableCell>
                     <TableCell>
-                      {customer.isActive}
+                      {user.status}
+                    </TableCell>
+                    <TableCell>
+                      {user.schoolId}
                     </TableCell>
                   </TableRow>
                 );
@@ -141,7 +147,7 @@ export const CustomersTable = (props) => {
   );
 };
 
-CustomersTable.propTypes = {
+UsersTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,
