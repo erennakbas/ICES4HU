@@ -29,8 +29,8 @@ export const items = [
     )
   },
   {
-    title: 'Manage Accounts',
-    path: '/accounts',
+    title: 'Manage Users',
+    path: '/users',
     authorized_roles:["ADMIN"],
     icon: (
       <SvgIcon fontSize="small">

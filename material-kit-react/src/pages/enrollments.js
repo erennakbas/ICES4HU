@@ -143,9 +143,6 @@ const Page = () => {
     try {
       const response = await axios.get(`${configService.url}/enrollment_requests`);
       setData(response.data);
-      // Burada, data değişkenine verileri atıyoruz.
-      // Bu kod bloğu içinde data değişkeni kullanılabilir.
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -209,6 +206,7 @@ const Page = () => {
   const handleDeleteRequest = async (event) => {
     const remainingRequests = filterRequests();
     const ids = {"ids": selectedEnrollments.map(e => e.id)}
+    console.log(ids);
     axios
       .put(`${configService.url}/enrollment_requests/reject`, ids)
       .then(async function (response) {

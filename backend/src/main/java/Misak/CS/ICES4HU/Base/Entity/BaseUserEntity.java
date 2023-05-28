@@ -32,6 +32,8 @@ public class BaseUserEntity implements Serializable {
         @Column(nullable = false, unique = true)
         @Email(message = "Email should be a valid email")
         private String email;
+        @Column(nullable = false, unique = false)
+        private String department;
         @Column(nullable = false)
         @Size(min = 6, message = "Password should be longer than 6 characters.")
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

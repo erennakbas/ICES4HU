@@ -1,5 +1,6 @@
 package Misak.CS.ICES4HU.User.Controller;
 
+import Misak.CS.ICES4HU.DTOs.IDListDTO;
 import Misak.CS.ICES4HU.User.Entity.UserEntity;
 import Misak.CS.ICES4HU.User.Service.UserService;
 import jakarta.validation.Valid;
@@ -38,14 +39,14 @@ public class UserController {
     }
 
     @PutMapping(path="/users/ban")
-    public ResponseEntity<String> banUser(@RequestBody List<UserEntity> users){
-        userService.banUsers(users);
+    public ResponseEntity<String> banUser(@RequestBody IDListDTO dto){
+        userService.banUsers(dto.getIds());
         return ResponseEntity.ok("Users banned successfully");
     }
 
-    @DeleteMapping(path="/users/delete")
-    public ResponseEntity<String> deleteUsers(@RequestBody List<UserEntity> users){
-        userService.deleteUsers(users);
+    @PutMapping(path="/users/delete")
+    public ResponseEntity<String> deleteUsers(@RequestBody IDListDTO dto){
+        userService.deleteUsers(dto.getIds());
         return ResponseEntity.ok("Users deleted successfully");
     }
 }

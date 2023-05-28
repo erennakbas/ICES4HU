@@ -5,7 +5,8 @@
       "email": "adminmisakicscs@proton.me" ,
       "password": "admin123",
       "role": "ADMIN",
-      "schoolId" : "11111111"
+      "schoolId" : "11111111",
+      "department": "None"
 
     },
     {
@@ -14,7 +15,8 @@
       "email": "ahmeterenakbas@protonmail.com" ,
       "password": "123123123",
       "role": "STUDENT",
-      "schoolId" : "21956763"
+      "schoolId" : "21956763",
+      "department": "Computer Engineering"
 
     },
     {
@@ -23,7 +25,8 @@
       "email": "hasimzafercicek@proton.me" ,
       "password": "123123123",
       "role": "STUDENT",
-      "schoolId" : "21956764"
+      "schoolId" : "21956764",
+      "department": "Computer Engineering"
     },
     {
       "firstName": "Ibrahim",
@@ -31,7 +34,8 @@
       "email": "ibrahimkosehucs@protonmail.com" ,
       "password": "123123123",
       "role": "INSTRUCTOR",
-      "schoolId" : "21956765"
+      "schoolId" : "21956765",
+      "department": "Statistics"
     },
     {
       "firstName": "Halil",
@@ -39,7 +43,8 @@
       "email": "halilbulke@proton.me" ,
       "password": "123123123",
       "role": "DEPARTMENT_MANAGER",
-      "schoolId" : "21956766"
+      "schoolId" : "21956766",
+      "department": "Electrical Electronics Engineering"
     },
     {
       "firstName": "Suleyman",
@@ -47,7 +52,8 @@
       "email": "suleymanyilmazhucs@proton.me" ,
       "password": "123123123",
       "role": "DEPARTMENT_MANAGER",
-      "schoolId" : "21956767"
+      "schoolId" : "21956767",
+      "department": "Mathematics"
     },
   {
     "firstName": "Elif",
@@ -56,7 +62,8 @@
     "password": "123123123",
     "role": "STUDENT",
     "schoolId" : "21956000",
-    "status": "DISMISSED"
+    "status": "DISMISSED",
+    "department": "Business Administration"
   },
   {
     "firstName": "Ali",
@@ -65,7 +72,8 @@
     "password": "123123123",
     "role": "INSTRUCTOR",
     "schoolId" : "21953576",
-    "status": "RESIGNED"
+    "status": "RESIGNED",
+    "department": "Law"
   }
 ]
 

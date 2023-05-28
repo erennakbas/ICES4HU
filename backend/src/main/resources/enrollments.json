@@ -5,7 +5,8 @@
     "email": "emma.johnson@example.com",
     "password": "SjkfsO&3s",
     "role": "STUDENT",
-    "schoolId": "21975863"
+    "schoolId": "21975863",
+    "department": "Law"
   },
   {
     "firstName": "Oliver",
@@ -13,7 +14,8 @@
     "email": "oliver.wilson@example.com",
     "password": "3klK0$ldm",
     "role": "INSTRUCTOR",
-    "schoolId": "21956465"
+    "schoolId": "21956465",
+    "department": "Business Administration"
   },
   {
     "firstName": "Ethan",
@@ -21,7 +23,8 @@
     "email": "ethan.brown@example.com",
     "password": "R09&lAsd1",
     "role": "STUDENT",
-    "schoolId": "21958863"
+    "schoolId": "21958863",
+    "department": "Mechanical Engineering"
   },
   {
     "firstName": "Sophia",
@@ -29,7 +32,8 @@
     "email": "sophia.smith@example.com",
     "password": "12Sjk@Rks",
     "role": "STUDENT",
-    "schoolId": "21999321"
+    "schoolId": "21999321",
+    "department": "Economy"
   },
   {
     "firstName": "Liam",
@@ -37,7 +41,8 @@
     "email": "liam.lee@example.com",
     "password": "LdKf)21!k",
     "role": "INSTRUCTOR",
-    "schoolId": "219569872"
+    "schoolId": "219569872",
+    "department": "Computer Engineering"
   },
   {
     "firstName": "Ava",
@@ -45,7 +50,8 @@
     "email": "ava.nguyen@example.com",
     "password": "19Aks%Osl",
     "role": "STUDENT",
-    "schoolId": "225689035"
+    "schoolId": "225689035",
+    "department": "Philosophy"
   },
   {
     "firstName": "Noah",
@@ -53,7 +59,8 @@
     "email": "noah.garcia@example.com",
     "password": "Ks&L31skj",
     "role": "INSTRUCTOR",
-    "schoolId": "22168905"
+    "schoolId": "22168905",
+    "department": "Sociology"
   },
   {
     "firstName": "Isabella",
@@ -61,7 +68,8 @@
     "email": "isabella.davis@example.com",
     "password": "s29J#laOs",
     "role": "STUDENT",
-    "schoolId": "220502159"
+    "schoolId": "220502159",
+    "department": "Civil Engineering"
   },
   {
     "firstName": "William",
@@ -69,7 +77,8 @@
     "email": "william.martinez@example.com",
     "password": "Sl#k1Dl0a",
     "role": "DEPARTMENT_MANAGER",
-    "schoolId": "21969852"
+    "schoolId": "21969852",
+    "department": "Medicine"
   },
   {
     "firstName": "Mia",
@@ -77,6 +86,7 @@
     "email": "mia.anderson@example.com",
     "password": "LksjF@2ks",
     "role": "STUDENT",
-    "schoolId": "21954636"
+    "schoolId": "21954636",
+    "department": "Pharmacy"
   }
 ]

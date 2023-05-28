@@ -1,5 +1,6 @@
 package Misak.CS.ICES4HU.User.Service.impl;
 
+import Misak.CS.ICES4HU.EnrollmentRequest.Entity.EnrollmentRequestEntity;
 import Misak.CS.ICES4HU.Enums.UserStatus;
 import Misak.CS.ICES4HU.User.Entity.UserEntity;
 import Misak.CS.ICES4HU.User.Repository.UserRepository;
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     public List<UserEntity> getUsers(){
+        userRepository.findAll();
         return userRepository.findAll();
     }
     public UserEntity saveUser(UserEntity user){
@@ -46,21 +48,18 @@ public class UserServiceImpl implements UserService {
         throw new IllegalArgumentException("School Id or password is incorrect");
     }
 
-    public void banUsers(List<UserEntity> users) {
+    public void banUsers(Iterable<Long> userIDs) {
+        Iterable<UserEntity> users = userRepository.findAllById(userIDs);
         for (UserEntity user : users) {
-            UserEntity userEntity = userRepository.findUserEntityBySchoolId(user.getSchoolId());
-            if (userEntity != null) {
-                userEntity.setBanned(true);
-                userRepository.save(userEntity);
-            } else {
-                throw new IllegalArgumentException("School Id is incorrect for user: " + user.getFirstName());
-            }
+            user.setBanned(true);
+            userRepository.save(user);
+
         }
     }
 
-    public void deleteUsers(List<UserEntity> users) {
-        for (UserEntity userEntity : users) {
-            UserEntity user = userRepository.findUserEntityBySchoolId(userEntity.getSchoolId());
+    public void deleteUsers(Iterable<Long> userIDs) {
+        Iterable<UserEntity> users = userRepository.findAllById(userIDs);
+        for (UserEntity user : users) {
             if (user != null) {
                 if (!user.getStatus().equals(UserStatus.ACTIVE)) {
                     userRepository.delete(user);
