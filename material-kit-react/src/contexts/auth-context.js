@@ -2,7 +2,9 @@ import { createContext, useContext, useEffect, useReducer, useRef } from "react"
 import PropTypes from "prop-types";
 import axios from "axios";
 import ConfigService from "src/services/configService";
+import { useRouter } from "next/router";
 const configService = ConfigService();
+
 //import Alert from "@material-ui/lab/Alert";
 
 const HANDLERS = {
@@ -20,7 +22,7 @@ const initialState = {
 const handlers = {
   [HANDLERS.INITIALIZE]: (state, action) => {
     const user = action.payload;
-
+    console.log(user);
     return {
       ...state,
       ...// if payload (user) is provided, then is authenticated
@@ -37,8 +39,6 @@ const handlers = {
   },
   [HANDLERS.SIGN_IN]: (state, action) => {
     const user = action.payload;
-    console.log("hayırlı işler")
-    console.log(user);
     return {
       ...state,
       isAuthenticated: true,
@@ -65,38 +65,36 @@ export const AuthProvider = (props) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
   const initialized = useRef(false);
-
+  const router = useRouter();
   const initialize = async () => {
     // Prevent from calling twice in development mode with React.StrictMode enabled
     if (initialized.current) {
       return;
     }
-
+    
     initialized.current = true;
-
     let isAuthenticated = false;
 
     try {
       isAuthenticated = window.sessionStorage.getItem("authenticated") === "true";
+      console.log("IS AUTHENTICATED", isAuthenticated);
     } catch (err) {
       console.error(err);
     }
 
     if (isAuthenticated) {
-      const user = {
-        id: "5e86809283e28b96d2d38537",
-        name: "Anika Visser",
-        email: "anika.visser@devias.io",
-      };
-
+      const id = window.sessionStorage.getItem("id");
+      const response = await axios.get(`${configService.url}/users/${id}`);
       dispatch({
         type: HANDLERS.INITIALIZE,
-        payload: user,
+        payload: response.data
       });
     } else {
       dispatch({
-        type: HANDLERS.INITIALIZE,
+        type: HANDLERS.INITIALIZE
+        
       });
+      router.push("auth/login")
     }
   };
 
@@ -137,7 +135,7 @@ export const AuthProvider = (props) => {
       password: password,
     };
     await axios
-      .post(`${configService.url}/login`, params)
+      .post(`${configService.url}/users/login`, params)
       .then(async function (response) {
         if (response !== null) {
           console.log(response);
@@ -148,6 +146,7 @@ export const AuthProvider = (props) => {
           //</Alert>;
           try {
             window.sessionStorage.setItem("authenticated", "true");
+            window.sessionStorage.setItem("id",response.data.id);
           } catch (err) {
             console.error(err);
           }
@@ -193,6 +192,7 @@ export const AuthProvider = (props) => {
 
   const signOut = () => {
     window.sessionStorage.setItem("authenticated", "false");
+    window.sessionStorage.removeItem("id");
     dispatch({
       type: HANDLERS.SIGN_OUT,
     });

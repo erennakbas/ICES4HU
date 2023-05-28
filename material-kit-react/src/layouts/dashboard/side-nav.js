@@ -25,7 +25,6 @@ export const SideNav = (props) => {
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const checkAuthorization = (navigationLink) => {
-    console.log(user);
     if (navigationLink.all_authorized || navigationLink.authorized_roles.includes(user?.role) ){
       return true;
     }
@@ -116,7 +115,7 @@ University
             }}
           >
             {items.map((item) => {
-              console.log(item)
+        
               return checkAuthorization(item) ?
                 <SideNavItem
                   active={true}

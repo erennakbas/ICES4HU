@@ -10,32 +10,16 @@ import {
   TextField,
   Unstable_Grid2 as Grid
 } from '@mui/material';
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  },
-  {
-    value: 'los-angeles',
-    label: 'Los Angeles'
-  }
-];
-
+import { useAuth } from 'src/hooks/use-auth';
+import { useFormik } from 'formik';
+import axios from 'axios';
+import ConfigService from 'src/services/configService';
+const configService = ConfigService();
 export const AccountProfileDetails = () => {
+  const { user } = useAuth();
+  
   const [values, setValues] = useState({
-    firstName: 'Eren',
-    lastName: 'Akbaş',
-    email: 'misak-i_cs@hotmail.com',
-    password:'',
+    ...user,
   });
 
   const handleChange = useCallback(
@@ -48,12 +32,17 @@ export const AccountProfileDetails = () => {
     []
   );
 
-  const handleSubmit = useCallback(
-    (event) => {
-      event.preventDefault();
-    },
-    []
-  );
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try{
+      const response = await axios.patch(`${configService.url}/users/myself/account-details`,values);
+      console.log(response);
+    }
+    catch(e){
+      console.log(e);
+    }
+
+};
 
   return (
     <form
@@ -130,7 +119,8 @@ export const AccountProfileDetails = () => {
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button variant="contained">
+          <Button variant="contained" 
+          onClick={handleSubmit}>
             Save details
           </Button>
         </CardActions>

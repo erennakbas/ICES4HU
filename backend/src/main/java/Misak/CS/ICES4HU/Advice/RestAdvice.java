@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,13 @@ import java.util.Map;
 public class RestAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public final ResponseEntity<ExceptionResponse> illegalException(Exception exception, WebRequest request){
+        System.out.println("An error occured on this request:");
+        System.out.println(request);
+        ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(),400,"Bad Request", exception.getMessage());
+        return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(IOException.class)
+    public final ResponseEntity<ExceptionResponse> ioException(Exception exception, WebRequest request){
         System.out.println("An error occured on this request:");
         System.out.println(request);
         ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(),400,"Bad Request", exception.getMessage());
