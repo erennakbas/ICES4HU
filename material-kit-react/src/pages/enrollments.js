@@ -183,19 +183,19 @@ const Page = () => {
   const selectedEnrollments = enrollments.filter((enrollment) =>
     enrollmentsSelection.selected.includes(enrollment.id)
   );
+  const filterRequests = () => {
+    return data.filter((user) =>
+      !selectedEnrollments.includes(user))
+    }
+  
   //console.log(selectedEnrollments);
   const handleAcceptRequest = async (event) => {
-    console.log(enrollments);
-    console.log(enrollmentsIds);
-    console.log(selectedEnrollments);
-    const remainingRequests = data.filter((user) =>
-        enrollments.selected.includes(user.id)
-     );
-    
-    await axios
-      .put(`${configService.url}/enrollment_requests/accept`, selectedEnrollments)
+    const remainingRequests = filterRequests();
+    const ids = {"ids": selectedEnrollments.map(e => e.id)}
+    axios
+      .put(`${configService.url}/enrollment_requests/accept`, ids)
       .then(async function (response) {
-        console.log(enrollmentsSelection.selected);
+        console.log("accepted");
         
       })
       .catch(function (error) {
@@ -203,13 +203,14 @@ const Page = () => {
         throw new Error("Please check your user id and password");
       });
       setData(remainingRequests);
-      console.log("accepted");
+      
   };
 
   const handleDeleteRequest = async (event) => {
-    console.log(event);
-    await axios
-      .put(`${configService.url}/enrollment_requests/reject`, selectedEnrollments)
+    const remainingRequests = filterRequests();
+    const ids = {"ids": selectedEnrollments.map(e => e.id)}
+    axios
+      .put(`${configService.url}/enrollment_requests/reject`, ids)
       .then(async function (response) {
         console.log("rejected");
       })
@@ -217,6 +218,8 @@ const Page = () => {
         console.log(error);
         throw new Error("Please check your user id and password");
       });
+      setData(remainingRequests);
+
   };
 
   return (
@@ -283,7 +286,7 @@ const Page = () => {
       </Box>
     </>
   );
-};
+                };
 
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 

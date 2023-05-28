@@ -1,5 +1,6 @@
 package Misak.CS.ICES4HU.EnrollmentRequest.Controller;
 
+import Misak.CS.ICES4HU.DTOs.IDListDTO;
 import Misak.CS.ICES4HU.EnrollmentRequest.Entity.EnrollmentRequestEntity;
 import Misak.CS.ICES4HU.EnrollmentRequest.Service.EnrollmentRequestService;
 import Misak.CS.ICES4HU.Enums.Role;
@@ -22,16 +23,16 @@ public class EnrollmentRequestController {
     }
 
     @PutMapping(path="/accept")
-    public ResponseEntity<String> acceptEnrollmentRequestList(@Valid @RequestBody Iterable<EnrollmentRequestEntity> enrollmentRequests){
+    public ResponseEntity<String> acceptEnrollmentRequestList(@RequestBody IDListDTO dto){
         System.out.println("Accepting enrollment request");
-        enrollmentRequestService.acceptEnrollmentRequest(enrollmentRequests);
+        enrollmentRequestService.acceptEnrollmentRequest(dto.getIds());
         return new ResponseEntity<>("Enrollment Requests are succesfully accepted", HttpStatusCode.valueOf(200));
     }
 
     @PutMapping(path="/reject")
-    public ResponseEntity<String> rejectEnrollmentRequestList(@Valid @RequestBody Iterable<EnrollmentRequestEntity> enrollmentRequests){
+    public ResponseEntity<String> rejectEnrollmentRequestList(@RequestBody IDListDTO dto){
         System.out.println("Rejecting enrollment request");
-        enrollmentRequestService.rejectEnrollmentRequest(enrollmentRequests);
+        enrollmentRequestService.rejectEnrollmentRequest(dto.getIds());
         return new ResponseEntity<>("Enrollment Requests are succesfully rejected", HttpStatusCode.valueOf(200));
     }
 
