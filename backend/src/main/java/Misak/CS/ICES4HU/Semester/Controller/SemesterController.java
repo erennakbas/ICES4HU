@@ -23,7 +23,7 @@ public class SemesterController {
     @Autowired
     private SemesterService semesterService;
 
-    @GetMapping(path = "")
+    @GetMapping(path = "/active")
     public ResponseEntity<SemesterEntity> getActiveSemester(){
         System.out.println("Getting semester");
         SemesterEntity entity= semesterService.getActiveSemester();
@@ -35,6 +35,13 @@ public class SemesterController {
         System.out.println("Creating semester");
         semesterService.createSemester(semester.startDate, semester.endDate);
         return new ResponseEntity<>("Semester is succesfully created", HttpStatusCode.valueOf(200));
+    }
+
+    @GetMapping(path = "")
+    public ResponseEntity<List<SemesterEntity>> getAllSemesters(){
+        System.out.println("Getting all semesters");
+        List<SemesterEntity> entities= semesterService.getAllSemesters();
+        return new ResponseEntity<>(entities, HttpStatusCode.valueOf(200));
     }
     
 

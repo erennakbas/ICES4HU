@@ -42,6 +42,16 @@ export const items = [
     )
   },
   {
+    title: 'Semester',
+    path: '/semester',
+    authorized_roles:["ADMIN"],
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    )
+  },
+  {
     title: 'Courses',
     path: '/courses',
     all_authorized:true,

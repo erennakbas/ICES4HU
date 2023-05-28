@@ -74,6 +74,33 @@
     "schoolId" : "21953576",
     "status": "RESIGNED",
     "department": "Law"
+  },
+  {
+    "firstName": "Ahmet",
+    "lastName": "Mahmut",
+    "email": "ernnakbas@gmail.com" ,
+    "password": "123123123",
+    "role": "INSTRUCTOR",
+    "schoolId" : "21911111",
+    "department": "Mathematics"
+  },
+  {
+    "firstName": "Sulo",
+    "lastName": "Can",
+    "email": "slymnyilmaz67@gmail.com" ,
+    "password": "123123123",
+    "role": "STUDENT",
+    "schoolId" : "21922222",
+    "department": "Mathematics"
+  },
+  {
+    "firstName": "Deniz",
+    "lastName": "Lale",
+    "email": "misakics@yandex.com" ,
+    "password": "123123123",
+    "role": "STUDENT",
+    "schoolId" : "219333333",
+    "department": "Mathematics"
   }
 ]
 

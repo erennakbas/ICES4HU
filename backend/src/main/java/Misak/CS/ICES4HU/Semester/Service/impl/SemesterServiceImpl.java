@@ -3,6 +3,7 @@ package Misak.CS.ICES4HU.Semester.Service.impl;
 import lombok.AllArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -70,6 +71,10 @@ public class SemesterServiceImpl implements SemesterService{
             }
         }
         throw new IllegalArgumentException("There is no active semester");
+    }
+
+    public List<SemesterEntity> getAllSemesters(){
+        return semesterRepository.findAll();
     }
     
 }
