@@ -2,6 +2,7 @@ package Misak.CS.ICES4HU.User.Controller;
 
 import Misak.CS.ICES4HU.User.Entity.UserEntity;
 import Misak.CS.ICES4HU.User.Service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
             UserEntity userEntity = userRepository.findUserEntityBySchoolId(user.getSchoolId());
             if (userEntity != null) {
                 userEntity.setBanned(true);
+                userRepository.save(userEntity);
             } else {
                 throw new IllegalArgumentException("School Id is incorrect for user: " + user.getFirstName());
             }

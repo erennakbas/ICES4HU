@@ -188,20 +188,22 @@ const Page = () => {
     console.log(enrollments);
     console.log(enrollmentsIds);
     console.log(selectedEnrollments);
+    const remainingRequests = data.filter((user) =>
+        enrollments.selected.includes(user.id)
+     );
+    
     await axios
       .put(`${configService.url}/enrollment_requests/accept`, selectedEnrollments)
       .then(async function (response) {
         console.log(enrollmentsSelection.selected);
-        const remainingRequests = data.filter((user) =>
-          selectedEnrollments.selected.includes(user.id)
-        );
-        setData(remainingRequests);
-        console.log("accepted");
+        
       })
       .catch(function (error) {
         console.log(error);
         throw new Error("Please check your user id and password");
       });
+      setData(remainingRequests);
+      console.log("accepted");
   };
 
   const handleDeleteRequest = async (event) => {

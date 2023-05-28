@@ -21,6 +21,7 @@ export const items = [
   {
     title: 'Enrollment Requests',
     path: '/enrollments',
+    authorized_roles:["ADMIN"],
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />
@@ -30,6 +31,7 @@ export const items = [
   {
     title: 'Manage Accounts',
     path: '/accounts',
+    authorized_roles:["ADMIN"],
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />
@@ -48,6 +50,7 @@ export const items = [
   {
     title: 'Account',
     path: '/account',
+    authorized_roles:[],
     icon: (
       <SvgIcon fontSize="small">
         <UserIcon />

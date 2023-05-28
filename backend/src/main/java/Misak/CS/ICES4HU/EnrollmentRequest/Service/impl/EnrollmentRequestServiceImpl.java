@@ -27,7 +27,7 @@ public class EnrollmentRequestServiceImpl implements EnrollmentRequestService {
             newUser.setPassword(enrollmentRequest.getPassword());
             newUser.setRole(enrollmentRequest.getRole());
             newUser.setSchoolId(enrollmentRequest.getSchoolId());
-
+            newUser.setPassword("11111111");
             // save new user
             userRepository.save(newUser);
 
@@ -37,7 +37,7 @@ public class EnrollmentRequestServiceImpl implements EnrollmentRequestService {
 
     public void rejectEnrollmentRequest(Iterable<EnrollmentRequestEntity> enrollmentRequests){
         for(EnrollmentRequestEntity enrollmentRequest: enrollmentRequests){
-            repository.delete(enrollmentRequest);
+            repository.deleteById(enrollmentRequest.getId());
         }
     }
 

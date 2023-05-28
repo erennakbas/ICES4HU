@@ -48,6 +48,24 @@
       "password": "123123123",
       "role": "DEPARTMENT_MANAGER",
       "schoolId" : "21956767"
-    }
+    },
+  {
+    "firstName": "Elif",
+    "lastName": "Nur",
+    "email": "nonsense2@proton.me" ,
+    "password": "123123123",
+    "role": "STUDENT",
+    "schoolId" : "21956000",
+    "status": "DISMISSED"
+  },
+  {
+    "firstName": "Ali",
+    "lastName": "Veli",
+    "email": "nonsense@proton.me" ,
+    "password": "123123123",
+    "role": "INSTRUCTOR",
+    "schoolId" : "21953576",
+    "status": "RESIGNED"
+  }
 ]
 
