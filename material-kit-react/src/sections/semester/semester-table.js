@@ -17,6 +17,7 @@ import {
 import { Scrollbar } from "src/components/scrollbar";
 import { useState } from "react";
 import { getInitials } from "src/utils/get-initials";
+import { color } from "@mui/system";
 
 export const SemesterTable = (props) => {
   const {
@@ -81,9 +82,14 @@ export const SemesterTable = (props) => {
                     return "Not Active";
                 }
 
+                const getBackgroundColor = deadline => {
+                    if(isSemesterActive() === "Active") return 'green';
+                    return 'gray';
+                }
+
                 return (
-                  <TableRow hover key={semester.id} selected={isSelected} onClick={() => handleSemesterSelect(semester.id)}>
-                    {/* <TableCell padding="checkbox">
+                  <TableRow hover key={semester.id} selected={isSelected} onClick={() => handleSemesterSelect(semester.id)}  >
+                    {/* <TableCell padding="checkbox">color={() => {if(isSemesterActive()) return "green" ; else return "gray"} }
                       <Checkbox
                         checked={isSelected}
                         onChange={(event) => {
@@ -105,7 +111,7 @@ export const SemesterTable = (props) => {
                     <TableCell>{semester.description}</TableCell>
                     <TableCell>{semester.startDate}</TableCell>
                     <TableCell>{semester.endDate}</TableCell>
-                    <TableCell>{isSemesterActive()}</TableCell>
+                    <TableCell style={{backgroundColor:getBackgroundColor()}} >{isSemesterActive()}</TableCell>
                   </TableRow>
                 );
               })}
