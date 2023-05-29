@@ -48,6 +48,13 @@ public class UserServiceImpl implements UserService {
         }
         throw new IllegalArgumentException("Id doesn't match");
     }
+    public UserEntity getUserByEmail(String email) {
+        Optional<UserEntity> opt = userRepository.findUserEntityByEmail(email);
+        if (opt.isPresent()){
+            return opt.get();
+        }
+        throw new IllegalArgumentException("No email found with this email "+email);
+    }
 
 
     public UserEntity login(String schoolId, String password){

@@ -2,7 +2,7 @@
     {
       "firstName": "admin",
       "lastName": "admin",
-      "email": "adminmisakicscs@proton.me" ,
+      "email": "misakics123@gmail.com" ,
       "password": "admin123",
       "role": "ADMIN",
       "schoolId" : "11111111",
@@ -68,7 +68,7 @@
   {
     "firstName": "Ali",
     "lastName": "Veli",
-    "email": "nonsense@proton.me" ,
+    "email": "misakics@yandex.com" ,
     "password": "123123123",
     "role": "INSTRUCTOR",
     "schoolId" : "21953576",
@@ -96,7 +96,7 @@
   {
     "firstName": "Deniz",
     "lastName": "Lale",
-    "email": "misakics@yandex.com" ,
+    "email": "adminmisakicscs@proton.me" ,
     "password": "123123123",
     "role": "STUDENT",
     "schoolId" : "219333333",

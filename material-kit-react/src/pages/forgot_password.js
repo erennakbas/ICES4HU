@@ -18,15 +18,16 @@ import {
 } from '@mui/material';
 import { useAuth } from 'src/hooks/use-auth';
 import { Layout as AuthLayout } from 'src/layouts/auth/layout';
-
+import ConfigService from 'src/services/configService';
+import axios from 'axios';
+const configService = ConfigService();
 const Page = () => {
   const router = useRouter();
   const auth = useAuth();
   const [method, setMethod] = useState('email');
   const formik = useFormik({
     initialValues: {
-      email: 'CSadmin@hotmail.com',
-      password: 'Password123!',
+      email: '',
       submit: null
     },
     //email yazılacak username yerine
@@ -36,16 +37,13 @@ const Page = () => {
         .email('Must be a valid email')
         .max(255)
         .required('Email is required'),
-      password: Yup
-        .string()
-        .max(255)
-        .required('Password is required')
     }),
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signIn(values.email, values.password);
-        router.push('/');
+        const res = await axios.post(`${configService.url}/email/forgot-password`, {email:values.email});
+      alert(res.data);
       } catch (err) {
+        alert("No account found with this email.");
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
         helpers.setSubmitting(false);
@@ -53,20 +51,6 @@ const Page = () => {
     }
   });
 
-  const handleMethodChange = useCallback(
-    (event, value) => {
-      setMethod(value);
-    },
-    []
-  );
-
-  const handleSkip = useCallback(
-    () => {
-      auth.skip();
-      router.push('/forgot_password');
-    },
-    [auth, router]
-  );
 
   return (
     <>

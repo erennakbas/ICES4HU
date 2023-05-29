@@ -4,8 +4,10 @@ import Misak.CS.ICES4HU.User.Entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    UserEntity findUserEntityByEmail(String email);
+    Optional<UserEntity> findUserEntityByEmail(String email);
     UserEntity findUserEntityBySchoolId(String schoolId);
 }

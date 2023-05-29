@@ -18,6 +18,6 @@ public interface UserService {
    UserEntity updateMyAccountDetails(AccountDetailsDTO dto);
    UserEntity updateMyPassword(PasswordDTO dto);
    UserEntity getUser(Long id);
-
    UserEntity updateMyPicture(PictureDTO dto);
+   UserEntity getUserByEmail(String email);
 }
