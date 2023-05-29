@@ -19,7 +19,7 @@ public class SemesterServiceImpl implements SemesterService{
     SemesterRepository semesterRepository;
     
 
-    public void createSemester(String startDate, String endDate){
+    public void createSemester(String startDate, String endDate, String description){
         SemesterEntity semesterEntity = new SemesterEntity();
         Date startDate1 = Date.valueOf(startDate);
         Date endDate1 = Date.valueOf(endDate);
@@ -41,15 +41,29 @@ public class SemesterServiceImpl implements SemesterService{
             if (endDate1.after(startDate2) && endDate1.before(endDate2)) {
                 throw new IllegalArgumentException("End date is between another semester start and end date");
             }
+
+            
+
+
             
 
 
             
         }
+        // check if new entity end date is before current date
+        if ( endDate1.before(new Date(System.currentTimeMillis()))) {
+            throw new IllegalArgumentException("Start date and end date is before current date");
+        }
+
+        // check if new entity start date is after end date
+        if (startDate1.after(endDate1)) {
+            throw new IllegalArgumentException("Start date is after end date");
+        }
 
         // create new entity
         semesterEntity.setStartDate(startDate);
         semesterEntity.setEndDate(endDate);
+        semesterEntity.setDescription(description);
         semesterRepository.save(semesterEntity);
     }
 
@@ -75,6 +89,10 @@ public class SemesterServiceImpl implements SemesterService{
 
     public List<SemesterEntity> getAllSemesters(){
         return semesterRepository.findAll();
+    }
+
+    public SemesterEntity getSemesterById(Long id){
+        return semesterRepository.findSemesterEntityById(id);
     }
     
 }

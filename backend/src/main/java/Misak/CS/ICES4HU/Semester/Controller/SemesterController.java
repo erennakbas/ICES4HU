@@ -31,9 +31,9 @@ public class SemesterController {
     }
 
     @PostMapping(path = "/create")
-    public ResponseEntity<String> createSemester(@Valid @RequestBody SemesterEntity semester){
+    public ResponseEntity<String> createSemester(@RequestBody SemesterEntity semester){
         System.out.println("Creating semester");
-        semesterService.createSemester(semester.startDate, semester.endDate);
+        semesterService.createSemester(semester.startDate, semester.endDate, semester.description);
         return new ResponseEntity<>("Semester is succesfully created", HttpStatusCode.valueOf(200));
     }
 
@@ -42,6 +42,13 @@ public class SemesterController {
         System.out.println("Getting all semesters");
         List<SemesterEntity> entities= semesterService.getAllSemesters();
         return new ResponseEntity<>(entities, HttpStatusCode.valueOf(200));
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<SemesterEntity> getSemesterById(@PathVariable Long id){
+        System.out.println("Getting semester by id");
+        SemesterEntity entity= semesterService.getSemesterById(id);
+        return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
     }
     
 
