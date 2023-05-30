@@ -24,7 +24,6 @@ public class SemesterEntity {
     @Column(nullable = false)
     public String endDate;
 
-    @ManyToMany
     @Column(nullable = false)
     public List<CourseEntity> courseList = new ArrayList<>();
 
