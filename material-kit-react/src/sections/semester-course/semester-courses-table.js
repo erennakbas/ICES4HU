@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 import {
   Avatar,
   Box,
@@ -12,17 +12,14 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
-import { Scrollbar } from 'src/components/scrollbar';
-import { getInitials } from 'src/utils/get-initials';
-import { useState, useCallback } from 'react';
+  Typography,
+  TextField,
+  Button,
+} from "@mui/material";
+import { Scrollbar } from "src/components/scrollbar";
+import { getInitials } from "src/utils/get-initials";
+import { useState, useCallback } from "react";
 import React from "react";
-
-
-
-
-
 
 export const SemesterCoursesTable = (props) => {
   const {
@@ -39,10 +36,8 @@ export const SemesterCoursesTable = (props) => {
     selected = [],
   } = props;
 
-  const selectedSome = (selected.length > 0) && (selected.length < items.length);
-  const selectedAll = (items.length > 0) && (selected.length === items.length);
-
-
+  const selectedSome = selected.length > 0 && selected.length < items.length;
+  const selectedAll = items.length > 0 && selected.length === items.length;
 
   return (
     <Card>
@@ -64,31 +59,20 @@ export const SemesterCoursesTable = (props) => {
                     }}
                   />
                 </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Code
-                </TableCell>
-                <TableCell>
-                  Instructor
-                </TableCell>
-                <TableCell>
-                  Department
-                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Code</TableCell>
+                <TableCell>Instructor</TableCell>
+                <TableCell>Credit</TableCell>
+                <TableCell>Department</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((course) => {
                 const isSelected = selected.includes(course.id);
                 // const createdAt = format(course.createdAt, 'dd/MM/yyyy');
-                
+
                 return (
-                  <TableRow
-                    hover
-                    key={course.id}
-                    selected={isSelected}
-                  >
+                  <TableRow hover key={course.id} selected={isSelected}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isSelected}
@@ -101,18 +85,11 @@ export const SemesterCoursesTable = (props) => {
                         }}
                       />
                     </TableCell>
-                    <TableCell >
-                      {course.name}
-                    </TableCell>
-                    <TableCell>
-                      {course.code}
-                    </TableCell>
-                    <TableCell >
-                      {course.instructor}
-                    </TableCell>
-                    <TableCell>
-                      {course.department}
-                    </TableCell>
+                    <TableCell>{course.name}</TableCell>
+                    <TableCell>{course.code}</TableCell>
+                    <TableCell>{course.instructor}</TableCell>
+                    <TableCell>{course.credit}</TableCell>
+                    <TableCell>{course.department}</TableCell>
                   </TableRow>
                 );
               })}
