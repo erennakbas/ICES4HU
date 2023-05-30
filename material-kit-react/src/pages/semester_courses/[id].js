@@ -77,6 +77,7 @@ const Page = () => {
   }, []);
 
   const [newCourse, setNewCourse] = useState({
+    id: "",
     name: "",
     code: "",
     instructor: "",
@@ -90,7 +91,7 @@ const Page = () => {
   };
   const addCourse = () => {
     console.log("add course");
-    const newCourseWithId = { ...newCourse, id: Date.now() };
+    const newCourseWithId = { ...newCourse };
     setCourseList((prevCourses) => [...prevCourses, newCourseWithId]);
     setNewCourse({ name: "", code: "", instructor: "", credit: "", department: "" });
   };
@@ -151,6 +152,8 @@ const Page = () => {
               page={page}
               rowsPerPage={rowsPerPage}
               selected={coursesSelection.selected}
+              setCourses={setCourseList}
+              courseList={courseList}
             />
             <Button variant="contained" color="primary" onClick={saveCourses}>
               Save

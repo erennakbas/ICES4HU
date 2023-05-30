@@ -102,6 +102,10 @@ public class SemesterServiceImpl implements SemesterService{
         SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
         List<CourseEntity> courseList1 = semesterEntity.getCourseList();
         for (CourseEntity course : courseList) {
+            if( course.getId() != null && courseRepository.findCourseEntityById(course.getId()) != null){
+                System.out.println("course already exist");
+                continue;
+            }
             CourseEntity courseEntity = new CourseEntity();
         
             courseEntity.setName(course.getName());
@@ -124,13 +128,17 @@ public class SemesterServiceImpl implements SemesterService{
     public SemesterEntity deleteSemesterCourseList(Long id, Long courseId){
         SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
         CourseEntity courseEntity = courseRepository.findCourseEntityById(courseId);
-        // if course is not in semester course list throw exception
-        if(!semesterEntity.getCourseList().contains(courseEntity)){
-            throw new IllegalArgumentException("Course is not in semester course list");
+        
+        for (CourseEntity course : semesterEntity.getCourseList()) {
+            System.out.println("course id: " + courseId + " course id in list: " + course.getId());
+            if (course.getId() == courseId) {
+                semesterEntity.getCourseList().remove(courseEntity);
+                semesterRepository.save(semesterEntity);
+                return semesterEntity;
+            }
         }
-        semesterEntity.getCourseList().remove(courseEntity);
-        semesterRepository.save(semesterEntity);
-        return semesterEntity;
+
+        throw new IllegalArgumentException("Course id is not in semester course list");
     }
 
     public SemesterEntity updateSemesterCourse(Long id, CourseEntity updatedCourseEntity){

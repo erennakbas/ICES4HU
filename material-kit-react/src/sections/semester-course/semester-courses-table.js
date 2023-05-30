@@ -40,6 +40,8 @@ export const SemesterCoursesTable = (props) => {
     page = 0,
     rowsPerPage = 0,
     selected = [],
+    setCourses,
+    courseList,
   } = props;
 
   const TableCellEdit = ({ value, onChange }) => {
@@ -59,7 +61,6 @@ export const SemesterCoursesTable = (props) => {
   };
 
   const [editMode, setEditMode] = useState([]);
-  const [courseList, setCourseList] = useState(items);
 
   const enterEditMode = (rowId) => {
     setEditMode((prevEditMode) => [...prevEditMode, rowId]);
@@ -82,11 +83,9 @@ export const SemesterCoursesTable = (props) => {
         };
 
         // Send PUT request to update the course on the backend
-        await axios.put(`${configService.url}/courses/${rowId}`, updatedCourse);
+        const response = await axios.put(`${configService.url}/semester/update/${id}`, updatedCourse);
 
-        // Update the course list state
-        const updatedItems = items.map((course) => (course.id === rowId ? updatedCourse : course));
-        setItems(updatedItems);
+        setCourses(response.data.courseList);
       }
 
       setEditMode((prevEditMode) => prevEditMode.filter((iD) => iD !== rowId));
@@ -96,25 +95,32 @@ export const SemesterCoursesTable = (props) => {
   };
 
   const handleCellChange = (rowId, fieldName, newValue) => {
+    console.log(rowId);
+    console.log(fieldName);
+    console.log(newValue);
     // Find the course by its ID
     const courseToUpdate = courseList.find((course) => course.id === rowId);
-
     // Update the specific field with the new value
     courseToUpdate[fieldName] = newValue;
 
-    // Update the course list state
-    setCourseList([...courseList]);
+
   };
 
   const handleDeleteCourse = async (courseId) => {
     try {
       console.log(courseId);
+      if(!courseId){
+        console.log("courseId is null");
+        const updatedItems = items.filter((course) => course.id !== courseId);
+        console.log(updatedItems);
+        setCourses([...updatedItems]);
+        return;
+      }
+        console.log("courseId is not null");
       // Send DELETE request to remove course from the backend
-      await axios.delete(`${configService.url}/semester/${id}`, { data: { courseId } });
+      const response = await axios.delete(`${configService.url}/semester/${id}/${courseId}`  );
 
-      // Remove the course from the items list in the state
-      const updatedItems = items.filter((course) => course.id !== courseId);
-      setItems(updatedItems);
+      setCourses(response.data.courseList);
 
       // Deselect the deleted course if it was selected
       if (selected.includes(courseId)) {
@@ -213,16 +219,23 @@ export const SemesterCoursesTable = (props) => {
                       </>
                     )}
                     <TableCell>
-                      {isEditMode ? (
-                        <Button onClick={() => exitEditMode(course.id)}>Save</Button>
-                      ) : (
-                        <Button onClick={() => enterEditMode(course.id)} color="warning">
-                          Edit
-                        </Button>
-                      )}
                       <Button onClick={() => handleDeleteCourse(course.id)} color="secondary">
                         Delete
                       </Button>
+                      {isEditMode ? ( course.id ? (
+                        <Button onClick={() => exitEditMode(course.id)}>Save</Button>
+                      ) : (
+                        <h1></h1>
+                      )
+                      ) : ( course.id ? (
+                        <Button onClick={() => enterEditMode(course.id)} color="warning">
+                          Edit
+                        </Button>
+                      ) : (
+                        <h1></h1>
+                      )
+                      )}
+                      
                     </TableCell>
                   </TableRow>
                 );
@@ -257,4 +270,6 @@ SemesterCoursesTable.propTypes = {
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
   selected: PropTypes.array,
+  setCourses : PropTypes.func,
+  courseList : PropTypes.array,
 };
