@@ -18,6 +18,7 @@ import { Scrollbar } from "src/components/scrollbar";
 import { useState } from "react";
 import { getInitials } from "src/utils/get-initials";
 import { color } from "@mui/system";
+import { useRouter } from "next/router";
 
 export const SemesterTable = (props) => {
   const {
@@ -38,10 +39,9 @@ export const SemesterTable = (props) => {
   const selectedSome = selected.length > 0 && selected.length < items.length;
   const selectedAll = items.length > 0 && selected.length === items.length;
 
-  const handleSemesterSelect = (semesterId) => {
-    // redirect to semester details page to add courses
-    
-  }
+  const router = useRouter();
+
+  
 
   return (
     <Card>
@@ -86,6 +86,15 @@ export const SemesterTable = (props) => {
                     if(isSemesterActive() === "Active") return 'green';
                     return 'gray';
                 }
+
+                const handleSemesterSelect = (semesterId) => {
+                    if(isSemesterActive() === "Not Active") {
+                        return;
+                    }
+                    // redirect to semester details page to add courses
+                    router.push(`/semester_courses/${semesterId}`);
+
+                  }
 
                 return (
                   <TableRow hover key={semester.id} selected={isSelected} onClick={() => handleSemesterSelect(semester.id)}  >

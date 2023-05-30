@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import Misak.CS.ICES4HU.Semester.Repository.SemesterRepository;
 import Misak.CS.ICES4HU.Semester.Service.SemesterService;
+import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 import Misak.CS.ICES4HU.Semester.Entity.SemesterEntity;
 
 
@@ -95,4 +96,15 @@ public class SemesterServiceImpl implements SemesterService{
         return semesterRepository.findSemesterEntityById(id);
     }
     
+    public void updateSemesterCourseList(Long id, List<CourseEntity> courseList){
+        // SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
+        // System.out.println("id: " + id);
+        // List<CourseEntity> courseList1 = semesterEntity.getCourseList();
+        // for (CourseEntity course : courseList) {
+        //     CourseEntity courseEntity = new CourseEntity();
+        //     courseList1.add(courseEntity);
+        // }
+        // semesterEntity.setCourseList(courseList);
+        // semesterRepository.save(semesterEntity);
+    }
 }

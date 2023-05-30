@@ -16,8 +16,15 @@ import {
 } from '@mui/material';
 import { Scrollbar } from 'src/components/scrollbar';
 import { getInitials } from 'src/utils/get-initials';
+import { useState, useCallback } from 'react';
+import React from "react";
 
-export const CoursesTable = (props) => {
+
+
+
+
+
+export const SemesterCoursesTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -29,11 +36,13 @@ export const CoursesTable = (props) => {
     onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = []
+    selected = [],
   } = props;
 
   const selectedSome = (selected.length > 0) && (selected.length < items.length);
   const selectedAll = (items.length > 0) && (selected.length === items.length);
+
+
 
   return (
     <Card>
@@ -73,7 +82,7 @@ export const CoursesTable = (props) => {
               {items.map((course) => {
                 const isSelected = selected.includes(course.id);
                 // const createdAt = format(course.createdAt, 'dd/MM/yyyy');
-
+                
                 return (
                   <TableRow
                     hover
@@ -92,24 +101,13 @@ export const CoursesTable = (props) => {
                         }}
                       />
                     </TableCell>
-                    <TableCell>
-                      <Stack
-                        alignItems="center"
-                        direction="row"
-                        spacing={2}
-                      >
-                        <Avatar src={course.avatar}>
-                          {getInitials(course.name)}
-                        </Avatar>
-                        <Typography variant="subtitle2">
-                          {course.name}
-                        </Typography>
-                      </Stack>
+                    <TableCell >
+                      {course.name}
                     </TableCell>
                     <TableCell>
                       {course.code}
                     </TableCell>
-                    <TableCell>
+                    <TableCell >
                       {course.instructor}
                     </TableCell>
                     <TableCell>
@@ -135,7 +133,7 @@ export const CoursesTable = (props) => {
   );
 };
 
-CoursesTable.propTypes = {
+SemesterCoursesTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,
@@ -146,5 +144,5 @@ CoursesTable.propTypes = {
   onSelectOne: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
-  selected: PropTypes.array
+  selected: PropTypes.array,
 };

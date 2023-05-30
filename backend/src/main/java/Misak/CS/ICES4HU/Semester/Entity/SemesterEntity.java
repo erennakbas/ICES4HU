@@ -1,7 +1,11 @@
 package Misak.CS.ICES4HU.Semester.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 
 @Data
 @Entity(name="semester")
@@ -20,8 +24,9 @@ public class SemesterEntity {
     @Column(nullable = false)
     public String endDate;
 
-    @Column()
-    public List<Long> courseIdList;
+    @ManyToMany
+    @Column(nullable = false)
+    public List<CourseEntity> courseList = new ArrayList<>();
 
     
 

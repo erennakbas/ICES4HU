@@ -54,13 +54,11 @@ const Page = () => {
         const endDate = enddateRef.current.value;
         const description = descriptionRef.current.value;
       
-        console.log(startDate, endDate, description);
         const newSemester = {
           "description": description,
           "startDate": startDate,
           "endDate": endDate
         }
-        console.log(newSemester);
         axios
           .post(`${configService.url}/semester/create`, newSemester)
           .then(async function (response) {

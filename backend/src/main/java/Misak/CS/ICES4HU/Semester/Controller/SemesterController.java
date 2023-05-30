@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 import Misak.CS.ICES4HU.Semester.Entity.SemesterEntity;
 import Misak.CS.ICES4HU.Semester.Service.SemesterService;
 import jakarta.validation.Valid;
@@ -48,8 +49,16 @@ public class SemesterController {
     public ResponseEntity<SemesterEntity> getSemesterById(@PathVariable Long id){
         System.out.println("Getting semester by id");
         SemesterEntity entity= semesterService.getSemesterById(id);
+        System.out.println(entity.courseList);
         return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
     }
     
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<String> updateSemesterCourseList(@PathVariable Long id, @RequestBody List<CourseEntity> courseList){
+        System.out.println("Updating semester");
+        System.out.println(courseList.get(0));
+        semesterService.updateSemesterCourseList(id, courseList);
+        return new ResponseEntity<>("Semester is succesfully updated", HttpStatusCode.valueOf(200));
+    }
 
 }

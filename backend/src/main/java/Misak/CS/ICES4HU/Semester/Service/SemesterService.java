@@ -1,6 +1,7 @@
 package Misak.CS.ICES4HU.Semester.Service;
 import java.util.List;
 
+import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 import Misak.CS.ICES4HU.Semester.Entity.SemesterEntity;
 
 
@@ -9,4 +10,5 @@ public interface SemesterService {
     SemesterEntity getActiveSemester();
     List<SemesterEntity> getAllSemesters();
     SemesterEntity getSemesterById(Long id);
+    void updateSemesterCourseList(Long id, List<CourseEntity> courseList);
 }
