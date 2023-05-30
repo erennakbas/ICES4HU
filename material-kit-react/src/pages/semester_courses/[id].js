@@ -139,6 +139,7 @@ const Page = () => {
             <SemesterCoursesSearch />
 
             <SemesterCoursesTable
+              id={id}
               count={courseList.length}
               items={courses}
               onDeselectAll={coursesSelection.handleDeselectAll}

@@ -17,13 +17,18 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import ConfigService from "src/services/configService";
+
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
 import { useState, useCallback } from "react";
 import React from "react";
+import axios from "axios";
+const configService = ConfigService();
 
 export const SemesterCoursesTable = (props) => {
   const {
+    id = 0,
     count = 0,
     items = [],
     onDeselectAll,
@@ -84,7 +89,7 @@ export const SemesterCoursesTable = (props) => {
         setItems(updatedItems);
       }
 
-      setEditMode((prevEditMode) => prevEditMode.filter((id) => id !== rowId));
+      setEditMode((prevEditMode) => prevEditMode.filter((iD) => iD !== rowId));
     } catch (error) {
       console.error(error);
     }
@@ -101,18 +106,19 @@ export const SemesterCoursesTable = (props) => {
     setCourseList([...courseList]);
   };
 
-  const handleDeleteCourse = async (rowId) => {
+  const handleDeleteCourse = async (courseId) => {
     try {
+      console.log(courseId);
       // Send DELETE request to remove course from the backend
-      await axios.delete(`${configService.url}/courses/${rowId}`);
+      await axios.delete(`${configService.url}/semester/${id}`, { data: { courseId } });
 
       // Remove the course from the items list in the state
-      const updatedItems = items.filter((course) => course.id !== rowId);
+      const updatedItems = items.filter((course) => course.id !== courseId);
       setItems(updatedItems);
 
       // Deselect the deleted course if it was selected
-      if (selected.includes(rowId)) {
-        const updatedSelected = selected.filter((id) => id !== rowId);
+      if (selected.includes(courseId)) {
+        const updatedSelected = selected.filter((iD) => iD !== courseId);
         setSelected(updatedSelected);
       }
     } catch (error) {
@@ -239,6 +245,7 @@ export const SemesterCoursesTable = (props) => {
 };
 
 SemesterCoursesTable.propTypes = {
+  id: PropTypes.string,
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,
