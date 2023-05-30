@@ -24,8 +24,8 @@ public class SemesterEntity {
     @Column(nullable = false)
     public String endDate;
 
-    @Column(nullable = false)
-    public List<Long> courseList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<CourseEntity> courseList = new ArrayList<>();
 
     
 

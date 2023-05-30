@@ -2,6 +2,8 @@ package Misak.CS.ICES4HU.Course.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class CourseEntity {
     @Id
     @Column(nullable = false, unique = true)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long Id;
 
     @Column(nullable = false)

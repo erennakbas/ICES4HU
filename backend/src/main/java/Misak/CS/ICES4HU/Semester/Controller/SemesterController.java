@@ -49,7 +49,6 @@ public class SemesterController {
     public ResponseEntity<SemesterEntity> getSemesterById(@PathVariable Long id){
         System.out.println("Getting semester by id");
         SemesterEntity entity= semesterService.getSemesterById(id);
-        System.out.println(entity.courseList);
         return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
     }
     

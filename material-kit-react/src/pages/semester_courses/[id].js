@@ -107,7 +107,6 @@ const Page = () => {
     const saveCourses = async () => {
       try {
         const response = await axios.put(`${configService.url}/semester/${id}`, selectedCourses);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
