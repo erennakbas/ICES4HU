@@ -98,22 +98,12 @@ public class SemesterServiceImpl implements SemesterService{
         return semesterRepository.findSemesterEntityById(id);
     }
     
-    public void updateSemesterCourseList(Long id, List<CourseEntity> courseList){
+    public void addSemesterCourses(Long id, List<CourseEntity> courseList){
         SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
         List<CourseEntity> courseList1 = semesterEntity.getCourseList();
         for (CourseEntity course : courseList) {
-            CourseEntity courseEntity ;
-            try {
-                if(courseRepository.findCourseEntityByCode(course.getCode()).equals(courseRepository.findCourseEntityById(course.getId()))){
-                    courseEntity = courseRepository.findCourseEntityByCode(course.getCode());
-                    courseList1.remove(courseEntity);
-                }else{
-                    courseEntity = new CourseEntity();
-                }
-            } catch (Exception e) {
-                courseEntity = new CourseEntity();
-            }
-            
+            CourseEntity courseEntity = new CourseEntity();
+        
             courseEntity.setName(course.getName());
             courseEntity.setCode(course.getCode());
             courseEntity.setCredit(course.getCredit());
@@ -131,15 +121,28 @@ public class SemesterServiceImpl implements SemesterService{
         return courseRepository.findAllById(ids);
     }
 
-    public SemesterEntity deleteSemesterCourseList(Long id, List<CourseEntity> courseList){
+    public SemesterEntity deleteSemesterCourseList(Long id, Long courseId){
         SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
-        List<CourseEntity> courseList1 = semesterEntity.getCourseList();
-        for (CourseEntity course : courseList) {
-            CourseEntity courseEntity = courseRepository.findCourseEntityById(course.getId());
-            courseList1.remove(courseEntity);
+        CourseEntity courseEntity = courseRepository.findCourseEntityById(courseId);
+        // if course is not in semester course list throw exception
+        if(!semesterEntity.getCourseList().contains(courseEntity)){
+            throw new IllegalArgumentException("Course is not in semester course list");
         }
-        semesterEntity.setCourseList(courseList1);
+        semesterEntity.getCourseList().remove(courseEntity);
         semesterRepository.save(semesterEntity);
+        return semesterEntity;
+    }
+
+    public SemesterEntity updateSemesterCourse(Long id, CourseEntity updatedCourseEntity){
+        SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
+        CourseEntity courseEntity = courseRepository.findCourseEntityById(updatedCourseEntity.getId());
+        courseEntity.setName(updatedCourseEntity.getName());
+        courseEntity.setCode(updatedCourseEntity.getCode());
+        courseEntity.setCredit(updatedCourseEntity.getCredit());
+        courseEntity.setInstructor(updatedCourseEntity.getInstructor());
+        courseEntity.setDepartment(updatedCourseEntity.getDepartment());
+        
+        courseRepository.save(courseEntity);
         return semesterEntity;
     }
 }

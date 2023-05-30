@@ -15,6 +15,9 @@ import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -53,16 +56,25 @@ public class SemesterController {
     }
     
     @PutMapping(path = "/{id}")
-    public ResponseEntity<String> updateSemesterCourseList(@PathVariable Long id, @RequestBody List<CourseEntity> courseList){
+    public ResponseEntity<String> addSemesterCourses(@PathVariable Long id, @RequestBody List<CourseEntity> courseList){
         System.out.println("Updating semester");
-        semesterService.updateSemesterCourseList(id, courseList);
+        semesterService.addSemesterCourses(id, courseList);
         return new ResponseEntity<>("Semester is succesfully updated", HttpStatusCode.valueOf(200));
     }
 
+    @PutMapping(value="update/{id}")
+    public ResponseEntity<SemesterEntity> updateSemesterCourse(@PathVariable Long id, @RequestBody CourseEntity courseEntity){
+        System.out.println("Updating semester course");
+        SemesterEntity entity= semesterService.updateSemesterCourse(id, courseEntity);
+        return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
+    }
+    
+
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<SemesterEntity> deleteSemesterCourseList(@PathVariable Long id, @RequestBody List<CourseEntity> courseList){
-        System.out.println("Deleting semester courses");
-        SemesterEntity entity= semesterService.deleteSemesterCourseList(id, courseList);
+    public ResponseEntity<SemesterEntity> deleteSemesterCourseList(@PathVariable Long id, @RequestBody CourseEntity courseEntity){
+        Long courseId = courseEntity.getId();
+        System.out.println("Deleting semester course");
+        SemesterEntity entity= semesterService.deleteSemesterCourseList(id, courseId);
         return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
     }
 
