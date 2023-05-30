@@ -4,4 +4,6 @@ import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CourseRepository extends JpaRepository<CourseEntity, Long> {
+    public CourseEntity findCourseEntityById(Long id);
+    public CourseEntity findCourseEntityByCode(String code);
 }
