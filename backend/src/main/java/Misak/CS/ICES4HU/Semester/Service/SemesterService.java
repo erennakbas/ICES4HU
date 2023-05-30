@@ -12,4 +12,5 @@ public interface SemesterService {
     SemesterEntity getSemesterById(Long id);
     void updateSemesterCourseList(Long id, List<CourseEntity> courseList);
     List<CourseEntity> getCoursesByIds(List<Long> ids);
+    SemesterEntity deleteSemesterCourseList(Long id, List<CourseEntity> courseList);
 }

@@ -102,7 +102,18 @@ public class SemesterServiceImpl implements SemesterService{
         SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
         List<CourseEntity> courseList1 = semesterEntity.getCourseList();
         for (CourseEntity course : courseList) {
-            CourseEntity courseEntity = new CourseEntity();
+            CourseEntity courseEntity ;
+            try {
+                if(courseRepository.findCourseEntityByCode(course.getCode()).equals(courseRepository.findCourseEntityById(course.getId()))){
+                    courseEntity = courseRepository.findCourseEntityByCode(course.getCode());
+                    courseList1.remove(courseEntity);
+                }else{
+                    courseEntity = new CourseEntity();
+                }
+            } catch (Exception e) {
+                courseEntity = new CourseEntity();
+            }
+            
             courseEntity.setName(course.getName());
             courseEntity.setCode(course.getCode());
             courseEntity.setCredit(course.getCredit());
@@ -118,5 +129,17 @@ public class SemesterServiceImpl implements SemesterService{
 
     public List<CourseEntity> getCoursesByIds(List<Long> ids){
         return courseRepository.findAllById(ids);
+    }
+
+    public SemesterEntity deleteSemesterCourseList(Long id, List<CourseEntity> courseList){
+        SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
+        List<CourseEntity> courseList1 = semesterEntity.getCourseList();
+        for (CourseEntity course : courseList) {
+            CourseEntity courseEntity = courseRepository.findCourseEntityById(course.getId());
+            courseList1.remove(courseEntity);
+        }
+        semesterEntity.setCourseList(courseList1);
+        semesterRepository.save(semesterEntity);
+        return semesterEntity;
     }
 }

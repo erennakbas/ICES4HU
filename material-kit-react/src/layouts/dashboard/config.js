@@ -54,7 +54,8 @@ export const items = [
   {
     title: 'Courses',
     path: '/courses',
-    all_authorized:true,
+    all_authorized:false,
+    authorized_roles:["STUDENT"],
     icon: (
       <SvgIcon fontSize="small">
         <ShoppingBagIcon />

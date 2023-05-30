@@ -59,4 +59,11 @@ public class SemesterController {
         return new ResponseEntity<>("Semester is succesfully updated", HttpStatusCode.valueOf(200));
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<SemesterEntity> deleteSemesterCourseList(@PathVariable Long id, @RequestBody List<CourseEntity> courseList){
+        System.out.println("Deleting semester courses");
+        SemesterEntity entity= semesterService.deleteSemesterCourseList(id, courseList);
+        return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
+    }
+
 }
