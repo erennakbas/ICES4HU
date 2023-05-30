@@ -97,14 +97,20 @@ public class SemesterServiceImpl implements SemesterService{
     }
     
     public void updateSemesterCourseList(Long id, List<CourseEntity> courseList){
-        // SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
-        // System.out.println("id: " + id);
-        // List<CourseEntity> courseList1 = semesterEntity.getCourseList();
-        // for (CourseEntity course : courseList) {
-        //     CourseEntity courseEntity = new CourseEntity();
-        //     courseList1.add(courseEntity);
-        // }
-        // semesterEntity.setCourseList(courseList);
-        // semesterRepository.save(semesterEntity);
+        SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
+        List<CourseEntity> courseList1 = semesterEntity.getCourseList();
+        for (CourseEntity course : courseList) {
+            CourseEntity courseEntity = new CourseEntity();
+            courseEntity.setId(course.getId());
+            courseEntity.setName(course.getName());
+            courseEntity.setCode(course.getCode());
+            courseEntity.setCredit(course.getCredit());
+            courseEntity.setInstructor(course.getInstructor());
+            courseEntity.setDepartment(course.getDepartment());
+            
+            courseList1.add(courseEntity);
+        }
+        semesterEntity.setCourseList(courseList);
+        semesterRepository.save(semesterEntity);
     }
 }
