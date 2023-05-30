@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@Entity
+@Entity(name="course")
 public class CourseEntity {
     @Id
+    @Column(nullable = false, unique = true)
     private Long Id;
 
     @Column(nullable = false)
@@ -21,7 +22,7 @@ public class CourseEntity {
     private String code;
 
     @Column(nullable = false)
-    private int credit;
+    private String credit;
 
     @Column(nullable = false)
     private String instructor;

@@ -25,7 +25,7 @@ public class SemesterEntity {
     public String endDate;
 
     @Column(nullable = false)
-    public List<CourseEntity> courseList = new ArrayList<>();
+    public List<Long> courseList = new ArrayList<>();
 
     
 

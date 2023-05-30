@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import Misak.CS.ICES4HU.Semester.Repository.SemesterRepository;
 import Misak.CS.ICES4HU.Semester.Service.SemesterService;
 import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
+import Misak.CS.ICES4HU.Course.Repository.CourseRepository;
 import Misak.CS.ICES4HU.Semester.Entity.SemesterEntity;
 
 
@@ -18,6 +19,7 @@ import Misak.CS.ICES4HU.Semester.Entity.SemesterEntity;
 @AllArgsConstructor
 public class SemesterServiceImpl implements SemesterService{
     SemesterRepository semesterRepository;
+    CourseRepository courseRepository;
     
 
     public void createSemester(String startDate, String endDate, String description){
@@ -98,7 +100,7 @@ public class SemesterServiceImpl implements SemesterService{
     
     public void updateSemesterCourseList(Long id, List<CourseEntity> courseList){
         SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
-        List<CourseEntity> courseList1 = semesterEntity.getCourseList();
+        List<Long> courseList1 = semesterEntity.getCourseList();
         for (CourseEntity course : courseList) {
             CourseEntity courseEntity = new CourseEntity();
             courseEntity.setId(course.getId());
@@ -107,10 +109,11 @@ public class SemesterServiceImpl implements SemesterService{
             courseEntity.setCredit(course.getCredit());
             courseEntity.setInstructor(course.getInstructor());
             courseEntity.setDepartment(course.getDepartment());
-            
-            courseList1.add(courseEntity);
+            courseRepository.save(courseEntity);
+
+            courseList1.add(courseEntity.getId());
         }
-        semesterEntity.setCourseList(courseList);
+        semesterEntity.setCourseList(courseList1);
         semesterRepository.save(semesterEntity);
     }
 }

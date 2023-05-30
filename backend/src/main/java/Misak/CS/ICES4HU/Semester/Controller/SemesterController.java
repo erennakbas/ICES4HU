@@ -57,7 +57,6 @@ public class SemesterController {
     public ResponseEntity<String> updateSemesterCourseList(@PathVariable Long id, @RequestBody List<CourseEntity> courseList){
         System.out.println("Updating semester");
         semesterService.updateSemesterCourseList(id, courseList);
-        System.out.println(courseList.get(0));
         return new ResponseEntity<>("Semester is succesfully updated", HttpStatusCode.valueOf(200));
     }
 
