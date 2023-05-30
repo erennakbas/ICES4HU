@@ -90,7 +90,8 @@ const Page = () => {
   };
   const addCourse = () => {
     console.log("add course");
-    setCourseList((prevCourseList) => [...prevCourseList, newCourse]);
+    const newCourseWithId = { ...newCourse, id: Date.now() };
+    setCourseList((prevCourses) => [...prevCourses, newCourseWithId]);
     setNewCourse({ name: "", code: "", instructor: "", credit: "", department: "" });
   };
 
