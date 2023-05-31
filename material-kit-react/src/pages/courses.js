@@ -148,7 +148,11 @@ const Page = () => {
     try {
       const response = await axios.get(`${configService.url}/semester/active`);
       setSemesterData(response.data);
-      setCourseList(response.data.courseList);
+      // filter response.data.courseList if instructor is not null and setCourseList
+      const courseList = response.data.courseList.filter(
+        (course) => course.instructor !== null
+      );
+      setCourseList(courseList);
     } catch (error) {
       alert("There is no active semester");
       router.push("/");
@@ -210,7 +214,7 @@ const Page = () => {
     // send selected courses to backend
     const saveCourses = async () => {
       try {
-        const response = await axios.put(`${configService.url}/semester/${id}`, selectedCourses);
+        const response = await axios.put(`${configService.url}/users/courselist`, selectedCourses);
       } catch (error) {
         console.error(error);
       }

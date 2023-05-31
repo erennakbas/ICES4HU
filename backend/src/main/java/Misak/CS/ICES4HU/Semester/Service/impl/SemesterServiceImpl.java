@@ -177,7 +177,7 @@ public class SemesterServiceImpl implements SemesterService{
 
         // check if manager is instructor of any course in active semester
         for (CourseEntity course : courseList) {
-            if (course.getInstructor().equals(managerName)) {
+            if (course.getDepartment().equals(managerName)) {
                 managerCourseList.add(course);
             }
         }

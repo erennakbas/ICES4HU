@@ -77,4 +77,10 @@ public class UserController {
             userService.updateMyPicture(dto);
             return ResponseEntity.ok("Image uploaded successfully.");
     }
+
+    @PatchMapping(path="/courselist")
+    public ResponseEntity<UserEntity> updateCourseList( @RequestBody List<CourseEntity> courseList){
+        UserEntity user = userService.updateCourseList();
+        return ResponseEntity.ok(user);
+    }
 }
