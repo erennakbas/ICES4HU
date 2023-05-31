@@ -26,20 +26,22 @@ import {
 import Input from "@mui/material/Input";
 import { useRef } from "react";
 import { SemesterCoursesSearch } from "src/sections/semester-course/semester-courses-search";
-import { SemesterCoursesTable } from "src/sections/semester-course/semester-courses-table";
+import { SemesterCoursesTable } from "src/pages/manage-courses-table";
+import { useAuth } from "src/hooks/use-auth";
 
 const configService = ConfigService();
 const now = new Date();
 
 const Page = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { user } = useAuth();
+
   const [data, setData] = useState([]);
   const [courseList, setCourseList] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${configService.url}/semester/${id}`);
+      const response = await axios.get(`${configService.url}/semester/courses/${user.department}`);
       setData(response.data);
       setCourseList(response.data.courseList);
     } catch (error) {
@@ -134,7 +136,6 @@ const Page = () => {
             <SemesterCoursesSearch />
 
             <SemesterCoursesTable
-              id={id}
               count={courseList.length}
               items={courses}
               onDeselectAll={coursesSelection.handleDeselectAll}
