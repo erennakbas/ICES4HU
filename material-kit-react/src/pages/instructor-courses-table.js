@@ -18,6 +18,7 @@ import {
   Button,
 } from "@mui/material";
 import ConfigService from "src/services/configService";
+import { useRouter } from "next/router";
 
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
@@ -42,65 +43,16 @@ export const SemesterCoursesTable = (props) => {
     setCourses,
     courseList,
   } = props;
+  const router = useRouter();
 
-  const TableCellEdit = ({ value, onChange }) => {
-    const [cellValue, setCellValue] = useState(value);
-
-    const handleInputChange = (event) => {
-      const newValue = event.target.value;
-      setCellValue(newValue);
-      onChange(newValue);
-    };
-
-    return (
-      <MuiTableCell>
-        <TextField value={cellValue} onChange={handleInputChange} />
-      </MuiTableCell>
-    );
-  };
-
-  const [editMode, setEditMode] = useState([]);
-
-  const enterEditMode = (rowId) => {
-    setEditMode((prevEditMode) => [...prevEditMode, rowId]);
-  };
-
-  const exitEditMode = async (rowId) => {
-    try {
-      if (editMode.includes(rowId)) {
-        // Find the course by its ID
-        const courseToUpdate = items.find((course) => course.id === rowId);
-
-        // Update the specific field with the new value
-        const updatedCourse = {
-          ...courseToUpdate,
-          name: courseToUpdate.name,
-          code: courseToUpdate.code,
-          credit: courseToUpdate.credit,
-          instructor: courseToUpdate.instructor,
-          department: courseToUpdate.department,
-        };
-
-        // Send PUT request to update the course on the backend
-        const response = await axios.put(`${configService.url}/semester/courses`, updatedCourse);
-
-        setCourses(response.data.courseList);
-      }
-
-      setEditMode((prevEditMode) => prevEditMode.filter((iD) => iD !== rowId));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleCellChange = (rowId, fieldName, newValue) => {
-    console.log(rowId);
-    console.log(fieldName);
-    console.log(newValue);
+  const createSurvey = (rowId) => {
     // Find the course by its ID
-    const courseToUpdate = courseList.find((course) => course.id === rowId);
-    // Update the specific field with the new value
-    courseToUpdate[fieldName] = newValue;
+    const course = items.find((course) => course.id === rowId);
+    // Create the survey for the course
+    // Navigate to the survey creation page passing the course as a parameter
+    // You can replace the console.log statement with your navigation code
+    console.log("Create survey for course:", course);
+    router.push(`/create_survey/${rowId}`);
   };
 
   const selectedSome = selected.length > 0 && selected.length < items.length;
@@ -156,10 +108,8 @@ export const SemesterCoursesTable = (props) => {
                     <TableCell>{course.credit}</TableCell>
                     <TableCell>{course.department}</TableCell>
                     <TableCell>{course.instructor}</TableCell>
-
                     <TableCell>
-                      course.id ? (<h1></h1>) :
-                      <Button onClick={() => enterEditMode(course.id)} color="warning">
+                      <Button onClick={() => createSurvey(course.id)} color="warning">
                         Create Survey
                       </Button>
                     </TableCell>

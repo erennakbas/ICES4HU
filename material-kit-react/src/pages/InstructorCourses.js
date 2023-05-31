@@ -26,7 +26,7 @@ import {
 import Input from "@mui/material/Input";
 import { useRef } from "react";
 import { SemesterCoursesSearch } from "src/sections/semester-course/semester-courses-search";
-import { SemesterCoursesTable } from "src/pages/manage-courses-table";
+import { SemesterCoursesTable } from "src/pages/instructor-courses-table";
 import { useAuth } from "src/hooks/use-auth";
 
 const configService = ConfigService();
@@ -38,11 +38,13 @@ const Page = () => {
 
   const [data, setData] = useState([]);
   const [courseList, setCourseList] = useState([]);
-
+  const userFullName = user.firstName + " " + user.lastName;
   const fetchData = async () => {
     try {
-      console.log(user.department);
-      const response = await axios.get(`${configService.url}/semester/courses/${user.firstName}`);
+      console.log(userFullName);
+      const response = await axios.get(
+        `${configService.url}/semester/courses/instructor/${userFullName}`
+      );
       setData(response.data);
       console.log(response.data);
       setCourseList(response.data);
