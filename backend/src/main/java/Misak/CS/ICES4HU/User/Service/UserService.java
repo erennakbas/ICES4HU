@@ -22,4 +22,5 @@ public interface UserService {
    UserEntity updateMyPicture(PictureDTO dto);
    UserEntity getUserByEmail(String email);
    List<CourseEntity> updateCourseList(AccountDetailsDTO dto,List<CourseEntity> courseList);
+   List<CourseEntity> getCourseList(AccountDetailsDTO dto);
 }

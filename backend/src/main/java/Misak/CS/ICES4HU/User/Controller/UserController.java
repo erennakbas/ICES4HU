@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -84,4 +87,12 @@ public class UserController {
         List<CourseEntity> newCourseList = userService.updateCourseList(dto,courseList);
         return ResponseEntity.ok(courseList);
     }
+
+    @GetMapping(path="/myself/courselist")
+    public ResponseEntity<List<CourseEntity>> getCourseList(@RequestBody AccountDetailsDTO dto){
+        List<CourseEntity> courseList = userService.getCourseList(dto);
+        return ResponseEntity.ok(courseList);
+    }
+   
+    
 }

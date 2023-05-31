@@ -63,6 +63,17 @@ export const items = [
     ),
   },
   {
+    title: "MyCourses",
+    path: "/mycourses",
+    all_authorized: false,
+    authorized_roles: ["STUDENT"],
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
     title: "Manage Courses",
     path: "/ManageCourses",
     all_authorized: false,
