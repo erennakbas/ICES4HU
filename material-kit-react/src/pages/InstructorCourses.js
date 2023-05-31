@@ -42,7 +42,7 @@ const Page = () => {
   const fetchData = async () => {
     try {
       console.log(user.department);
-      const response = await axios.get(`${configService.url}/semester/courses/${user.department}`);
+      const response = await axios.get(`${configService.url}/semester/courses/${user.firstName}`);
       setData(response.data);
       console.log(response.data);
       setCourseList(response.data);
@@ -79,15 +79,6 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
-
-  const [newCourse, setNewCourse] = useState({
-    id: "",
-    name: "",
-    code: "",
-    instructor: "",
-    credit: "",
-    department: "",
-  });
 
   return (
     <>

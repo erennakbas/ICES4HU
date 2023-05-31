@@ -137,8 +137,6 @@ export const SemesterCoursesTable = (props) => {
             <TableBody>
               {items.map((course) => {
                 const isSelected = selected.includes(course.id);
-                const isEditMode = editMode.includes(course.id);
-
                 return (
                   <TableRow hover key={course.id} selected={isSelected}>
                     <TableCell padding="checkbox">
@@ -153,42 +151,17 @@ export const SemesterCoursesTable = (props) => {
                         }}
                       />
                     </TableCell>
-                    {isEditMode ? (
-                      <>
-                        <TableCell>{course.name}</TableCell>
-                        <TableCell>{course.code}</TableCell>
-                        <TableCell>{course.credit}</TableCell>
-                        <TableCell>{course.department}</TableCell>
-                        <TableCellEdit
-                          value={course.instructor}
-                          onChange={(newValue) =>
-                            handleCellChange(course.id, "instructor", newValue)
-                          }
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <TableCell>{course.name}</TableCell>
-                        <TableCell>{course.code}</TableCell>
-                        <TableCell>{course.credit}</TableCell>
-                        <TableCell>{course.department}</TableCell>
-                        <TableCell>{course.instructor}</TableCell>
-                      </>
-                    )}
+                    <TableCell>{course.name}</TableCell>
+                    <TableCell>{course.code}</TableCell>
+                    <TableCell>{course.credit}</TableCell>
+                    <TableCell>{course.department}</TableCell>
+                    <TableCell>{course.instructor}</TableCell>
+
                     <TableCell>
-                      {isEditMode ? (
-                        course.id ? (
-                          <Button onClick={() => exitEditMode(course.id)}>Save</Button>
-                        ) : (
-                          <h1></h1>
-                        )
-                      ) : course.id ? (
-                        <Button onClick={() => enterEditMode(course.id)} color="warning">
-                          Edit
-                        </Button>
-                      ) : (
-                        <h1></h1>
-                      )}
+                      course.id ? (<h1></h1>) :
+                      <Button onClick={() => enterEditMode(course.id)} color="warning">
+                        Create Survey
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );
