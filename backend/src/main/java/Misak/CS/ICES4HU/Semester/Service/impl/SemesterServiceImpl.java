@@ -155,8 +155,8 @@ public class SemesterServiceImpl implements SemesterService{
     }
 
 
-    public SemesterEntity instructorUpdateSemesterCourse(Long id, CourseEntity updatedCourseEntity){
-        SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
+    public SemesterEntity instructorUpdateSemesterCourse(CourseEntity updatedCourseEntity){
+        SemesterEntity semesterEntity = getActiveSemester();
         CourseEntity courseEntity = courseRepository.findCourseEntityById(updatedCourseEntity.getId());
         courseEntity.setInstructor(updatedCourseEntity.getInstructor());
 

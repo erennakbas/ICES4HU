@@ -1,5 +1,6 @@
 package Misak.CS.ICES4HU.User.Service;
 
+import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 import Misak.CS.ICES4HU.DTOs.AccountDetailsDTO;
 import Misak.CS.ICES4HU.DTOs.PasswordDTO;
 import Misak.CS.ICES4HU.DTOs.PictureDTO;
@@ -20,4 +21,5 @@ public interface UserService {
    UserEntity getUser(Long id);
    UserEntity updateMyPicture(PictureDTO dto);
    UserEntity getUserByEmail(String email);
+   List<CourseEntity> updateCourseList(AccountDetailsDTO dto,List<CourseEntity> courseList);
 }

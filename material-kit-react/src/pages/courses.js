@@ -18,6 +18,7 @@ import axios from 'axios';
 import { useRouter } from "next/router";
 import { SemesterCoursesSearch } from 'src/sections/semester-course/semester-courses-search';
 import { SemesterCoursesTable } from 'src/sections/semester-course/semester-courses-table';
+import { useAuth } from 'src/hooks/use-auth';
 
 
 
@@ -138,6 +139,11 @@ const now = new Date();
 
 const Page = () => {
   const router = useRouter();
+  const { user } = useAuth();
+  
+  const [values, setValues] = useState({
+    ...user,
+  });
 
 
   const [courseList, setCourseList] = useState([]);
@@ -214,7 +220,10 @@ const Page = () => {
     // send selected courses to backend
     const saveCourses = async () => {
       try {
-        const response = await axios.put(`${configService.url}/users/courselist`, selectedCourses);
+        const response = await axios.put(`${configService.url}/users/courselist`, {  values, selectedCourses });
+        console.log(response.data);
+        alert("Courses added to your courses");
+        setCourseList(response.data);
       } catch (error) {
         console.error(error);
       }

@@ -77,10 +77,10 @@ public class SemesterController {
         return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
     }
 
-    @PutMapping(path = "/courses/{id}")
-    public ResponseEntity<SemesterEntity> instructorUpdateSemesterCourse(@PathVariable Long id, @RequestBody CourseEntity updatedCourseEntity){
+    @PutMapping(path = "/courses")
+    public ResponseEntity<SemesterEntity> instructorUpdateSemesterCourse( @RequestBody CourseEntity updatedCourseEntity){
         System.out.println("Updating semester course");
-        SemesterEntity entity= semesterService.instructorUpdateSemesterCourse(id, updatedCourseEntity);
+        SemesterEntity entity= semesterService.instructorUpdateSemesterCourse( updatedCourseEntity);
         return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
     }
 

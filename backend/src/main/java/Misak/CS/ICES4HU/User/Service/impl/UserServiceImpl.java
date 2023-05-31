@@ -1,5 +1,6 @@
 package Misak.CS.ICES4HU.User.Service.impl;
 
+import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 import Misak.CS.ICES4HU.DTOs.AccountDetailsDTO;
 import Misak.CS.ICES4HU.DTOs.PasswordDTO;
 import Misak.CS.ICES4HU.DTOs.PictureDTO;
@@ -114,5 +115,27 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("IO Exception Happened while uploading the image");
         }
         return userRepository.save(user);
+    }
+
+    public List<CourseEntity> updateCourseList(AccountDetailsDTO dto,List<CourseEntity> courseList){
+        UserEntity user = userRepository.findById(dto.getId()).get();
+        List<CourseEntity> userCourseList = user.getTakenCourseList();
+        // in loop check if the course code is equal to the course code in the course list if it is then add it to the user course list 
+        for (CourseEntity course : courseList) {
+            boolean found = false;
+            for (CourseEntity userCourse : userCourseList) {
+                if (course.getCode().equals(userCourse.getCode())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                userCourseList.add(course);
+            }
+        }
+        user.setTakenCourseList(userCourseList);
+        userRepository.save(user);
+        return userCourseList;
+
     }
 }

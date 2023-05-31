@@ -1,5 +1,6 @@
 package Misak.CS.ICES4HU.User.Controller;
 
+import Misak.CS.ICES4HU.Course.Entity.CourseEntity;
 import Misak.CS.ICES4HU.DTOs.AccountDetailsDTO;
 import Misak.CS.ICES4HU.DTOs.IDListDTO;
 import Misak.CS.ICES4HU.DTOs.PasswordDTO;
@@ -78,9 +79,9 @@ public class UserController {
             return ResponseEntity.ok("Image uploaded successfully.");
     }
 
-    // @PatchMapping(path="/courselist")
-    // public ResponseEntity<UserEntity> updateCourseList( @RequestBody List<CourseEntity> courseList){
-    //     UserEntity user = userService.updateCourseList();
-    //     return ResponseEntity.ok(user);
-    // }
+    @PatchMapping(path="/courselist")
+    public ResponseEntity<List<CourseEntity>> updateCourseList(@RequestBody AccountDetailsDTO dto , @RequestBody List<CourseEntity> courseList){
+        List<CourseEntity> newCourseList = userService.updateCourseList(dto,courseList);
+        return ResponseEntity.ok(courseList);
+    }
 }
