@@ -143,4 +143,6 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userRepository.findById(dto.getId()).get();
         return user.getTakenCourseList();
     }
+
+
 }

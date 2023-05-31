@@ -16,4 +16,5 @@ public interface SemesterService {
     SemesterEntity updateSemesterCourse(Long id, CourseEntity courseEntity);
     SemesterEntity instructorUpdateSemesterCourse( CourseEntity updatedCourseEntity);
     List<CourseEntity> getCoursesByManagerName(String managerName);
+    List<CourseEntity> getCoursesByInstructorName(String instructorName);
 }

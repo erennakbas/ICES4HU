@@ -185,4 +185,22 @@ public class SemesterServiceImpl implements SemesterService{
         
         return managerCourseList;
     }
+
+    public List<CourseEntity> getCoursesByInstructorName(String instructorName){
+        SemesterEntity semesterEntity = getActiveSemester();
+        List<CourseEntity> courseList = semesterEntity.getCourseList();
+
+         // create new list to store courses that manager is instructor of them
+         List<CourseEntity> instructorCourseList = new ArrayList<CourseEntity>();
+
+         // check if manager is instructor of any course in active semester
+         for (CourseEntity course : courseList) {
+             if (course.getInstructor().equals(instructorName)) {
+                instructorCourseList.add(course);
+             }
+         }
+ 
+         
+         return instructorCourseList;
+    }
 }
