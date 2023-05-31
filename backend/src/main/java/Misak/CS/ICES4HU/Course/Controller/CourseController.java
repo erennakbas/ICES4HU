@@ -28,6 +28,8 @@ public class CourseController {
 
     @PostMapping(path="/survey/{courseId}")
     public ResponseEntity<String> createSurvey(@PathVariable Long courseId, @RequestBody SurveyEntity survey){
+        System.out.println("CourseId: " + courseId + " Survey: " + survey);
+        System.out.println(survey.getQuestions().get(0).getQuestion());
         courseService.createSurvey(courseId, survey);
         return new ResponseEntity<>("Survey is succesfully created", HttpStatusCode.valueOf(200));
 
