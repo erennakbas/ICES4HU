@@ -89,12 +89,6 @@ const Page = () => {
     const { name, value } = event.target;
     setNewCourse((prevCourse) => ({ ...prevCourse, [name]: value }));
   };
-  const addCourse = () => {
-    console.log("add course");
-    const newCourseWithId = { ...newCourse };
-    setCourseList((prevCourses) => [...prevCourses, newCourseWithId]);
-    setNewCourse({ name: "", code: "", credit: "", department: "" });
-  };
 
   const saveCourses = () => {
     console.log("save courses");
@@ -155,47 +149,6 @@ const Page = () => {
               setCourses={setCourseList}
               courseList={courseList}
             />
-            <Button variant="contained" color="primary" onClick={saveCourses}>
-              Save
-            </Button>
-            <form style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-              <TextField
-                name="name"
-                label="Name"
-                value={newCourse.name}
-                onChange={handleInputChange}
-                margin="normal"
-                sx={{ marginRight: "8px" }}
-              />
-              <TextField
-                name="code"
-                label="Code"
-                value={newCourse.code}
-                onChange={handleInputChange}
-                margin="normal"
-                sx={{ marginRight: "8px" }}
-              />
-
-              <TextField
-                name="credit"
-                label="Credit"
-                value={newCourse.credit}
-                onChange={handleInputChange}
-                margin="normal"
-                sx={{ marginRight: "8px" }}
-              />
-              <TextField
-                name="department"
-                label="Department"
-                value={newCourse.department}
-                onChange={handleInputChange}
-                margin="normal"
-                sx={{ marginRight: "8px" }}
-              />
-              <Button variant="contained" color="primary" onClick={addCourse}>
-                Add Course
-              </Button>
-            </form>
           </Stack>
         </Container>
       </Box>

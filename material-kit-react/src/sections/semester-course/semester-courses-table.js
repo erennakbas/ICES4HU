@@ -77,13 +77,15 @@ export const SemesterCoursesTable = (props) => {
           ...courseToUpdate,
           name: courseToUpdate.name,
           code: courseToUpdate.code,
-          instructor: courseToUpdate.instructor,
           credit: courseToUpdate.credit,
           department: courseToUpdate.department,
         };
 
         // Send PUT request to update the course on the backend
-        const response = await axios.put(`${configService.url}/semester/update/${id}`, updatedCourse);
+        const response = await axios.put(
+          `${configService.url}/semester/update/${id}`,
+          updatedCourse
+        );
 
         setCourses(response.data.courseList);
       }
@@ -102,23 +104,21 @@ export const SemesterCoursesTable = (props) => {
     const courseToUpdate = courseList.find((course) => course.id === rowId);
     // Update the specific field with the new value
     courseToUpdate[fieldName] = newValue;
-
-
   };
 
   const handleDeleteCourse = async (courseId) => {
     try {
       console.log(courseId);
-      if(!courseId){
+      if (!courseId) {
         console.log("courseId is null");
         const updatedItems = items.filter((course) => course.id !== courseId);
         console.log(updatedItems);
         setCourses([...updatedItems]);
         return;
       }
-        console.log("courseId is not null");
+      console.log("courseId is not null");
       // Send DELETE request to remove course from the backend
-      const response = await axios.delete(`${configService.url}/semester/${id}/${courseId}`  );
+      const response = await axios.delete(`${configService.url}/semester/${id}/${courseId}`);
 
       setCourses(response.data.courseList);
 
@@ -157,7 +157,6 @@ export const SemesterCoursesTable = (props) => {
                 </TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Code</TableCell>
-                <TableCell>Instructor</TableCell>
                 <TableCell>Credit</TableCell>
                 <TableCell>Department</TableCell>
                 <TableCell>Actions</TableCell>
@@ -193,12 +192,6 @@ export const SemesterCoursesTable = (props) => {
                           onChange={(newValue) => handleCellChange(course.id, "code", newValue)}
                         />
                         <TableCellEdit
-                          value={course.instructor}
-                          onChange={(newValue) =>
-                            handleCellChange(course.id, "instructor", newValue)
-                          }
-                        />
-                        <TableCellEdit
                           value={course.credit}
                           onChange={(newValue) => handleCellChange(course.id, "credit", newValue)}
                         />
@@ -213,7 +206,7 @@ export const SemesterCoursesTable = (props) => {
                       <>
                         <TableCell>{course.name}</TableCell>
                         <TableCell>{course.code}</TableCell>
-                        <TableCell>{course.instructor}</TableCell>
+
                         <TableCell>{course.credit}</TableCell>
                         <TableCell>{course.department}</TableCell>
                       </>
@@ -222,20 +215,19 @@ export const SemesterCoursesTable = (props) => {
                       <Button onClick={() => handleDeleteCourse(course.id)} color="secondary">
                         Delete
                       </Button>
-                      {isEditMode ? ( course.id ? (
-                        <Button onClick={() => exitEditMode(course.id)}>Save</Button>
-                      ) : (
-                        <h1></h1>
-                      )
-                      ) : ( course.id ? (
+                      {isEditMode ? (
+                        course.id ? (
+                          <Button onClick={() => exitEditMode(course.id)}>Save</Button>
+                        ) : (
+                          <h1></h1>
+                        )
+                      ) : course.id ? (
                         <Button onClick={() => enterEditMode(course.id)} color="warning">
                           Edit
                         </Button>
                       ) : (
                         <h1></h1>
-                      )
                       )}
-                      
                     </TableCell>
                   </TableRow>
                 );
@@ -270,6 +262,6 @@ SemesterCoursesTable.propTypes = {
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
   selected: PropTypes.array,
-  setCourses : PropTypes.func,
-  courseList : PropTypes.array,
+  setCourses: PropTypes.func,
+  courseList: PropTypes.array,
 };
