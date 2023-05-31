@@ -27,10 +27,10 @@ public class CourseEntity {
     @Column(nullable = false)
     private String credit;
 
-    @Column(nullable = false)
     private String instructor;
 
     @Column(nullable = false)
     private String department;
+
 
 }

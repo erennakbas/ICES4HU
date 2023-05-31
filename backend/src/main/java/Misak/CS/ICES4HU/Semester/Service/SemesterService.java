@@ -14,4 +14,6 @@ public interface SemesterService {
     List<CourseEntity> getCoursesByIds(List<Long> ids);
     SemesterEntity deleteSemesterCourseList(Long id, Long courseId);
     SemesterEntity updateSemesterCourse(Long id, CourseEntity courseEntity);
+    SemesterEntity instructorUpdateSemesterCourse(Long id, CourseEntity updatedCourseEntity);
+    List<CourseEntity> getCoursesByManagerName(String managerName);
 }

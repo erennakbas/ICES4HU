@@ -77,4 +77,18 @@ public class SemesterController {
         return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
     }
 
+    @PutMapping(path = "/courses/{id}")
+    public ResponseEntity<SemesterEntity> instructorUpdateSemesterCourse(@PathVariable Long id, @RequestBody CourseEntity updatedCourseEntity){
+        System.out.println("Updating semester course");
+        SemesterEntity entity= semesterService.instructorUpdateSemesterCourse(id, updatedCourseEntity);
+        return new ResponseEntity<>(entity, HttpStatusCode.valueOf(200));
+    }
+
+    @GetMapping(path = "/courses/{managerName}")
+    public ResponseEntity<List<CourseEntity>> getCoursesByManagerName(@PathVariable String managerName){
+        System.out.println("Getting courses by manager name");
+        List<CourseEntity> entities= semesterService.getCoursesByManagerName(managerName);
+        return new ResponseEntity<>(entities, HttpStatusCode.valueOf(200));
+    }
+
 }

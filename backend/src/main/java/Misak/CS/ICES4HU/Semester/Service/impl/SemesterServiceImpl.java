@@ -3,6 +3,7 @@ package Misak.CS.ICES4HU.Semester.Service.impl;
 import lombok.AllArgsConstructor;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -111,7 +112,6 @@ public class SemesterServiceImpl implements SemesterService{
             courseEntity.setName(course.getName());
             courseEntity.setCode(course.getCode());
             courseEntity.setCredit(course.getCredit());
-            courseEntity.setInstructor(course.getInstructor());
             courseEntity.setDepartment(course.getDepartment());
             courseRepository.save(courseEntity);
 
@@ -152,5 +152,37 @@ public class SemesterServiceImpl implements SemesterService{
         
         courseRepository.save(courseEntity);
         return semesterEntity;
+    }
+
+
+    public SemesterEntity instructorUpdateSemesterCourse(Long id, CourseEntity updatedCourseEntity){
+        SemesterEntity semesterEntity = semesterRepository.findSemesterEntityById(id);
+        CourseEntity courseEntity = courseRepository.findCourseEntityById(updatedCourseEntity.getId());
+        courseEntity.setInstructor(updatedCourseEntity.getInstructor());
+
+        
+        courseRepository.save(courseEntity);
+        return semesterEntity;
+    }
+
+    public List<CourseEntity> getCoursesByManagerName(String managerName){
+        // get active semester
+        SemesterEntity semesterEntity = getActiveSemester();
+
+        // get all courses in active semester
+        List<CourseEntity> courseList = semesterEntity.getCourseList();
+
+        // create new list to store courses that manager is instructor of them
+        List<CourseEntity> managerCourseList = new ArrayList<CourseEntity>();
+
+        // check if manager is instructor of any course in active semester
+        for (CourseEntity course : courseList) {
+            if (course.getInstructor().equals(managerName)) {
+                managerCourseList.add(course);
+            }
+        }
+
+        
+        return managerCourseList;
     }
 }

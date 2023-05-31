@@ -261,8 +261,8 @@ const Page = () => {
                 </Button>
                 
             </Stack>
-            <SemesterCoursesSearch />
-            <SemesterCoursesTable
+            <CoursesSearch />
+            <CoursesTable
               count={courseList.length}
               items={courses}
               onDeselectAll={coursesSelection.handleDeselectAll}
