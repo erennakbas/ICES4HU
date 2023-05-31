@@ -91,4 +91,11 @@ public class SemesterController {
         return new ResponseEntity<>(entities, HttpStatusCode.valueOf(200));
     }
 
+    @GetMapping(path = "/courses/instructor/{instructorName}")
+    public ResponseEntity<List<CourseEntity>> getCoursesByInstructorName(@PathVariable String instructorName){
+        System.out.println("Getting courses by manager name");
+        List<CourseEntity> entities= semesterService.getCoursesByInstructorName(instructorName);
+        return new ResponseEntity<>(entities, HttpStatusCode.valueOf(200));
+    }
+
 }

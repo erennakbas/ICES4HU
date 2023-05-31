@@ -30,6 +30,7 @@ const now = new Date();
 
 
 
+
 const Page = () => {
   const router = useRouter();
   const { user } = useAuth();
@@ -47,11 +48,10 @@ const Page = () => {
     try {
       const response = await axios.get(`${configService.url}/semester/active`);
       setSemesterData(response.data);
-      // filter response.data.courseList if instructor is not null and setCourseList
-      const courseList = response.data.courseList.filter(
-        (course) => course.instructor !== null
-      );
-      setCourseList(courseList);
+      
+      const response2 = await axios.put(`${configService.url}/myself/courselist`, {  values });
+      setCourseList(response2.data);
+
     } catch (error) {
       alert("There is no active semester");
       router.push("/");
@@ -101,29 +101,6 @@ const Page = () => {
     []
   );
 
-  const saveCourses = () => {
-    console.log("add courses to mycourses");
-
-    // get selected courses
-    const selectedCourses = courses.filter((course) =>
-      coursesSelection.selected.includes(course.id)
-    );
-    console.log(selectedCourses);
-
-    // send selected courses to backend
-    const saveCourses = async () => {
-      try {
-        const response = await axios.put(`${configService.url}/users/courselist`, {  values, selectedCourses });
-        console.log(response.data);
-        alert("Courses added to your courses");
-        setCourseList(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    // saveCourses();
-  };
   
 
   return (
@@ -149,22 +126,10 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Active Courses In {semesterData.description}
+                  My Courses In {semesterData.description}
                 </Typography>
               </Stack>
               
-                <Button
-                color="primary"
-                  startIcon={(
-                    <SvgIcon fontSize="small">
-                      <PlusIcon />
-                    </SvgIcon>
-                  )}
-                  variant="contained"
-                  onClick={saveCourses}
-                >
-                  Enroll Courses
-                </Button>
                 
             </Stack>
             <CoursesSearch />
