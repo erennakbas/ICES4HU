@@ -56,24 +56,20 @@ const Page = () => {
     setQuestions(updatedQuestions);
   };
 
-  const handleSaveAllQuestions = () => {
-    // Burada anketi kaydetmek için gereken işlemleri yapabilirsiniz
-    setSurveySaved(true);
-  };
-
   const handleSurveySubmission = () => {
     // Anketteki soruları JSON formatında hazırla
     const surveyData = {
+      Id: id,
       questions: questions.map((question) => ({
-        id: question.id,
+        Id: question.id,
         question: question.question,
         type: question.type,
       })),
     };
-
+    console.log(surveyData);
     // Axios ile backend'e gönder
     axios
-      .post(`${configService.url}/semester/courses/instructor/`, surveyData)
+      .post(`${configService.url}/courses/survey/${id}`, surveyData)
       .then((response) => {
         // İşlem başarılı olduğunda yapılacaklar
         console.log("Survey submitted successfully!");
@@ -200,18 +196,7 @@ const Page = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleSaveAllQuestions}
-            style={{
-              margin: "4px 4px",
-            }}
-          >
-            Save All Questions
-          </Button>
-
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSurveySubmission}
+            onClick={() => handleSurveySubmission()}
             style={{
               margin: "4px 4px",
             }}
