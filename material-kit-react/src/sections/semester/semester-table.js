@@ -12,13 +12,19 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography,
-} from "@mui/material";
+  Typography} from "@mui/material";
+import { makeStyles } from "@material-ui/core";
 import { Scrollbar } from "src/components/scrollbar";
 import { useState } from "react";
 import { getInitials } from "src/utils/get-initials";
 import { color } from "@mui/system";
 import { useRouter } from "next/router";
+
+const useStyles = makeStyles({
+  hover: {
+    cursor: 'pointer',
+  },
+});
 
 export const SemesterTable = (props) => {
   const {
@@ -38,10 +44,10 @@ export const SemesterTable = (props) => {
   //console.log(onSelectOne);
   const selectedSome = selected.length > 0 && selected.length < items.length;
   const selectedAll = items.length > 0 && selected.length === items.length;
-
+  
   const router = useRouter();
 
-  
+  const classes = useStyles();
 
   return (
     <Card>
@@ -97,7 +103,8 @@ export const SemesterTable = (props) => {
                   }
 
                 return (
-                  <TableRow hover key={semester.id} selected={isSelected} onClick={() => handleSemesterSelect(semester.id)}  >
+                  <TableRow classes={{ hover: classes.hover }}
+                  hover key={semester.id} selected={isSelected} onClick={() => handleSemesterSelect(semester.id)}  >
                     {/* <TableCell padding="checkbox">color={() => {if(isSemesterActive()) return "green" ; else return "gray"} }
                       <Checkbox
                         checked={isSelected}
