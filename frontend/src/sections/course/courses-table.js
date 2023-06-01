@@ -1,5 +1,7 @@
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import PropTypes from "prop-types";
+import { format } from "date-fns";
+import { useRouter } from "next/router";
+
 import {
   Avatar,
   Box,
@@ -12,10 +14,11 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography
-} from '@mui/material';
-import { Scrollbar } from 'src/components/scrollbar';
-import { getInitials } from 'src/utils/get-initials';
+  Typography,
+  Button,
+} from "@mui/material";
+import { Scrollbar } from "src/components/scrollbar";
+import { getInitials } from "src/utils/get-initials";
 
 export const CoursesTable = (props) => {
   const {
@@ -29,12 +32,18 @@ export const CoursesTable = (props) => {
     onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = []
+    selected = [],
   } = props;
+  const router = useRouter();
+  const { id } = router.query;
+  const createSurvey = (rowId) => {
+    router.push(`/evaluate_survey/${rowId}`);
+  };
 
-  const selectedSome = (selected.length > 0) && (selected.length < items.length);
-  const selectedAll = (items.length > 0) && (selected.length === items.length);
-
+  const selectedSome = selected.length > 0 && selected.length < items.length;
+  const selectedAll = items.length > 0 && selected.length === items.length;
+  console.log(router.pathname);
+  console.log("router");
   return (
     <Card>
       <Scrollbar>
@@ -55,18 +64,12 @@ export const CoursesTable = (props) => {
                     }}
                   />
                 </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Code
-                </TableCell>
-                <TableCell>
-                  Instructor
-                </TableCell>
-                <TableCell>
-                  Department
-                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Code</TableCell>
+                <TableCell>Credit</TableCell>
+                <TableCell>Instructor</TableCell>
+                <TableCell>Department</TableCell>
+                {router.pathname == "/mycourses" ? <TableCell>Actions</TableCell> : <></>}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -75,11 +78,7 @@ export const CoursesTable = (props) => {
                 // const createdAt = format(course.createdAt, 'dd/MM/yyyy');
 
                 return (
-                  <TableRow
-                    hover
-                    key={course.id}
-                    selected={isSelected}
-                  >
+                  <TableRow hover key={course.id} selected={isSelected}>
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isSelected}
@@ -93,28 +92,24 @@ export const CoursesTable = (props) => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Stack
-                        alignItems="center"
-                        direction="row"
-                        spacing={2}
-                      >
-                        <Avatar src={course.avatar}>
-                          {getInitials(course.name)}
-                        </Avatar>
-                        <Typography variant="subtitle2">
-                          {course.name}
-                        </Typography>
+                      <Stack alignItems="center" direction="row" spacing={2}>
+                        <Avatar src={course.avatar}>{getInitials(course.name)}</Avatar>
+                        <Typography variant="subtitle2">{course.name}</Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>
-                      {course.code}
-                    </TableCell>
-                    <TableCell>
-                      {course.instructor}
-                    </TableCell>
-                    <TableCell>
-                      {course.department}
-                    </TableCell>
+                    <TableCell>{course.code}</TableCell>
+                    <TableCell>{course.credit}</TableCell>
+                    <TableCell>{course.instructor}</TableCell>
+                    <TableCell>{course.department}</TableCell>
+                    {router.pathname == "/mycourses" ? (
+                      <TableCell>
+                        <Button onClick={() => createSurvey(course.id)} color="warning">
+                          Evaluate Survey
+                        </Button>
+                      </TableCell>
+                    ) : (
+                      <></>
+                    )}
                   </TableRow>
                 );
               })}
@@ -146,5 +141,5 @@ CoursesTable.propTypes = {
   onSelectOne: PropTypes.func,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
-  selected: PropTypes.array
+  selected: PropTypes.array,
 };

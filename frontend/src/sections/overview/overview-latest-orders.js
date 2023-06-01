@@ -29,7 +29,7 @@ export const OverviewLatestOrders = (props) => {
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Surveys" />
+      <CardHeader title="Courses" />
       <Scrollbar sx={{ flexGrow: 1 }}>
         <Box sx={{ minWidth: 800 }}>
           <Table>
@@ -43,13 +43,13 @@ export const OverviewLatestOrders = (props) => {
             </TableHead>
             <TableBody>
               {orders.map((order) => {
-                const createdAt = format(order.createdAt, "dd/MM/yyyy");
+                //const createdAt = format(order.createdAt, "dd/MM/yyyy");
 
                 return (
                   <TableRow hover key={order.id}>
                     <TableCell>{order.ref}</TableCell>
                     <TableCell>{order.customer.name}</TableCell>
-                    <TableCell>{createdAt}</TableCell>
+                    <TableCell>{order.createdAt}</TableCell>
                     <TableCell>
                       <SeverityPill color={statusMap[order.status]}>{order.status}</SeverityPill>
                     </TableCell>

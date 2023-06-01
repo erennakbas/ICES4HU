@@ -109,6 +109,8 @@ const Page = () => {
     const saveCourses = async () => {
       try {
         const response = await axios.put(`${configService.url}/semester/${id}`, selectedCourses);
+        alert("Course added to semester");
+        router.reload();
       } catch (error) {
         console.error(error);
       }
