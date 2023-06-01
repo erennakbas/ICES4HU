@@ -192,14 +192,14 @@ const Page = () => {
     axios
       .put(`${configService.url}/enrollment_requests/accept`, ids)
       .then(async function (response) {
-        console.log("accepted");
-        
+        setData(remainingRequests);
+        alert("Users have been successfully registered into the system.");
       })
       .catch(function (error) {
-        console.log(error);
-        throw new Error("Please check your user id and password");
+        console.log(error)
+        alert("An error occured."+error.message);
       });
-      setData(remainingRequests);
+     
       
   };
 
@@ -210,13 +210,14 @@ const Page = () => {
     axios
       .put(`${configService.url}/enrollment_requests/reject`, ids)
       .then(async function (response) {
-        console.log("rejected");
+        setData(remainingRequests);
+        alert("Enrollment Requests have been successfully rejected.");
       })
       .catch(function (error) {
         console.log(error);
-        throw new Error("Please check your user id and password");
+        alert("An error occured."+error.message);
       });
-      setData(remainingRequests);
+      
 
   };
 

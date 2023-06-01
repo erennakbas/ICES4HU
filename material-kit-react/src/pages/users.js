@@ -81,12 +81,13 @@ const Page = () => {
     axios
       .put(`${configService.url}/users/ban`, ids)
       .then(async function (response) {
+        alert("Users are banned.")
         console.log("banned");
         
       })
       .catch(function (error) {
         console.log(error);
-        throw new Error("Please check your user id and password");
+        alert("An error occured."+error.message);
       });
       
   };
@@ -97,13 +98,14 @@ const Page = () => {
     axios
       .put(`${configService.url}/users/delete`, ids)
       .then(async function (response) {
-        console.log("deleted");
+        alert("Users deleted.")
+        setData(remainingUsers);
       })
       .catch(function (error) {
         console.log(error);
-        throw new Error("Please check your user id and password");
+        alert("Users couldn't be deleted.")
       });
-      setData(remainingUsers);
+      
 
   };
   return (
