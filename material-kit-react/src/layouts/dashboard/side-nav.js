@@ -31,9 +31,6 @@ export const SideNav = (props) => {
     return false;
   };
 
-  const generateUniqueId = () => {
-    return Math.random().toString(36).substr(2, 9); // Rastgele bir benzersiz değer oluşturur
-  };
 
   const content = (
     <Scrollbar
@@ -112,20 +109,19 @@ export const SideNav = (props) => {
               m: 0,
             }}
           >
-            {items.map((item) => {
-              return checkAuthorization(item) ? (
+            {items.map((item, index) => {
+              return checkAuthorization(item) && (
                 <SideNavItem
                   active={true}
                   disabled={item.disabled}
                   external={item.external}
                   icon={item.icon}
-                  key={generateUniqueId()} // Rastgele bir benzersiz değer kullanın
+                  key={index}
                   path={item.path}
                   title={item.title}
                 />
-              ) : (
-                <></>
               );
+            
             })}
           </Stack>
         </Box>
