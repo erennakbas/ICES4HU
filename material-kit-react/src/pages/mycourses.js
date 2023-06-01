@@ -48,8 +48,8 @@ const Page = () => {
     try {
       const response = await axios.get(`${configService.url}/semester/active`);
       setSemesterData(response.data);
-      
-      const response2 = await axios.put(`${configService.url}/myself/courselist`, {  values });
+      console.log(values);
+      const response2 = await axios.get(`${configService.url}/users/myself/courselist`, {  values });
       setCourseList(response2.data);
 
     } catch (error) {

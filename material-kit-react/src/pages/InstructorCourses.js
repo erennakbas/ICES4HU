@@ -38,7 +38,7 @@ const Page = () => {
 
   const [data, setData] = useState([]);
   const [courseList, setCourseList] = useState([]);
-  const userFullName = user.firstName + " " + user.lastName;
+  const userFullName = user?.firstName + " " + user?.lastName;
   const fetchData = async () => {
     try {
       console.log(userFullName);

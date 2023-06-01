@@ -18,7 +18,7 @@ import {
   Button,
 } from "@mui/material";
 import ConfigService from "src/services/configService";
-
+import { useAuth } from "src/hooks/use-auth";
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
 import { useState, useCallback } from "react";
@@ -27,6 +27,7 @@ import axios from "axios";
 const configService = ConfigService();
 
 export const SemesterCoursesTable = (props) => {
+  const {user} = useAuth();
   const {
     count = 0,
     items = [],
@@ -83,8 +84,10 @@ export const SemesterCoursesTable = (props) => {
 
         // Send PUT request to update the course on the backend
         const response = await axios.put(`${configService.url}/semester/courses`, updatedCourse);
-
-        setCourses(response.data.courseList);
+        const courses = response.data.courseList.filter((course)=>
+         course.department === user?.department);
+        console.log(courses);
+        setCourses(courses);
       }
 
       setEditMode((prevEditMode) => prevEditMode.filter((iD) => iD !== rowId));
@@ -184,7 +187,7 @@ export const SemesterCoursesTable = (props) => {
                         )
                       ) : course.id ? (
                         <Button onClick={() => enterEditMode(course.id)} color="warning">
-                          Edit
+                          Assign Instructor
                         </Button>
                       ) : (
                         <h1></h1>

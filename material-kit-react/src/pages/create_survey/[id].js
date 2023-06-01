@@ -72,7 +72,7 @@ const Page = () => {
       .post(`${configService.url}/courses/survey/${id}`, surveyData)
       .then((response) => {
         // İşlem başarılı olduğunda yapılacaklar
-        console.log("Survey submitted successfully!");
+        alert("Survey submitted successfully!");
       })
       .catch((error) => {
         // Hata durumunda yapılacaklar

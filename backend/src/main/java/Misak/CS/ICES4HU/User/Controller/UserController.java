@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,7 +90,7 @@ public class UserController {
     }
 
     @GetMapping(path="/myself/courselist")
-    public ResponseEntity<List<CourseEntity>> getCourseList(@RequestBody AccountDetailsDTO dto){
+    public ResponseEntity<List<CourseEntity>> getCourseList(@RequestParam AccountDetailsDTO dto){
         List<CourseEntity> courseList = userService.getCourseList(dto);
         return ResponseEntity.ok(courseList);
     }

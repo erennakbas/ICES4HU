@@ -100,20 +100,13 @@ const Page = () => {
     },
     []
   );
-
-  const saveCourses = () => {
-    console.log("add courses to mycourses");
-
-    // get selected courses
-    const selectedCourses = courses.filter((course) =>
-      coursesSelection.selected.includes(course.id)
-    );
-    console.log(selectedCourses);
-
     // send selected courses to backend
     const saveCourses = async () => {
       try {
-        const response = await axios.put(`${configService.url}/users/courselist`, {  values, selectedCourses });
+        const selectedCourses = courses.filter((course) =>
+        coursesSelection.selected.includes(course.id)
+      );
+        const response = await axios.patch(`${configService.url}/users/courselist`, {  values, selectedCourses });
         console.log(response.data);
         alert("Courses added to your courses");
         setCourseList(response.data);
@@ -122,8 +115,6 @@ const Page = () => {
       }
     };
 
-    // saveCourses();
-  };
   
 
   return (

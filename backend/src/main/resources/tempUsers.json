@@ -29,13 +29,41 @@
       "department": "Computer Engineering"
     },
     {
+      "firstName": "Berkay",
+      "lastName": "Kolordu",
+      "email": "berkaykolordu@proton.me" ,
+      "password": "123123123",
+      "role": "INSTRUCTOR",
+      "schoolId" : "220658423",
+      "department": "Computer Engineering"
+    },
+    {
+      "firstName": "Mustafa",
+      "lastName": "Ozturk",
+      "email": "musatafaozturk@proton.me" ,
+      "password": "123123123",
+      "role": "DEPARTMENT_MANAGER",
+      "schoolId" : "21956704",
+      "department": "Computer Engineering"
+    },
+
+    {
       "firstName": "Ibrahim",
       "lastName": "Kose",
       "email": "ibrahimkosehucs@protonmail.com" ,
       "password": "123123123",
       "role": "INSTRUCTOR",
       "schoolId" : "21956765",
-      "department": "Statistics"
+      "department": "Electrical Electronics Engineering"
+    },
+    {
+      "firstName": "Ilteris",
+      "lastName": "Kagan",
+      "email": "ilteriskagan@protonmail.com" ,
+      "password": "123123123",
+      "role": "INSTRUCTOR",
+      "schoolId" : "22147896",
+      "department": "Computer Engineering"
     },
     {
       "firstName": "Halil",
