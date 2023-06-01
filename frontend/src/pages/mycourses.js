@@ -49,7 +49,9 @@ const Page = () => {
       const response = await axios.get(`${configService.url}/semester/active`);
       setSemesterData(response.data);
       console.log(values);
-      const response2 = await axios.get(`${configService.url}/users/myself/courselist`, {  values });
+      const response2 = await axios.get(`${configService.url}/users/myself/courselist/${values.id}`, )
+
+      console.log(response2.data);
       setCourseList(response2.data);
 
     } catch (error) {

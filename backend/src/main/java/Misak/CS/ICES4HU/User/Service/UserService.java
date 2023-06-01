@@ -21,6 +21,6 @@ public interface UserService {
    UserEntity getUser(Long id);
    UserEntity updateMyPicture(PictureDTO dto);
    UserEntity getUserByEmail(String email);
-   List<CourseEntity> updateCourseList(AccountDetailsDTO dto,List<CourseEntity> courseList);
-   List<CourseEntity> getCourseList(AccountDetailsDTO dto);
+   List<CourseEntity> updateCourseList(Long id,List<CourseEntity> courseList);
+   List<CourseEntity> getCourseList(Long id);
 }

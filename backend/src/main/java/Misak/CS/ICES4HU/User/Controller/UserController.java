@@ -83,15 +83,16 @@ public class UserController {
             return ResponseEntity.ok("Image uploaded successfully.");
     }
 
-    @PatchMapping(path="/courselist")
-    public ResponseEntity<List<CourseEntity>> updateCourseList(@RequestBody AccountDetailsDTO dto , @RequestBody List<CourseEntity> courseList){
-        List<CourseEntity> newCourseList = userService.updateCourseList(dto,courseList);
-        return ResponseEntity.ok(courseList);
+    @PatchMapping(path="/courselist/{id}")
+    public ResponseEntity<List<CourseEntity>> updateCourseList(@PathVariable Long id , @RequestBody List<CourseEntity> courseList){
+        List<CourseEntity> newCourseList = userService.updateCourseList(id,courseList);
+        return ResponseEntity.ok(newCourseList);
     }
 
-    @GetMapping(path="/myself/courselist")
-    public ResponseEntity<List<CourseEntity>> getCourseList(@RequestParam AccountDetailsDTO dto){
-        List<CourseEntity> courseList = userService.getCourseList(dto);
+    @GetMapping(path="/myself/courselist/{id}")
+    public ResponseEntity<List<CourseEntity>> getCourseList(@PathVariable Long id){
+        System.out.println("getting course list" + id);
+        List<CourseEntity> courseList = userService.getCourseList(id);
         return ResponseEntity.ok(courseList);
     }
    

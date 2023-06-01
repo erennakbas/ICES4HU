@@ -117,8 +117,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public List<CourseEntity> updateCourseList(AccountDetailsDTO dto,List<CourseEntity> courseList){
-        UserEntity user = userRepository.findById(dto.getId()).get();
+    public List<CourseEntity> updateCourseList(Long id,List<CourseEntity> courseList){
+        UserEntity user = userRepository.findById(id).get();
         List<CourseEntity> userCourseList = user.getTakenCourseList();
         // in loop check if the course code is equal to the course code in the course list if it is then add it to the user course list 
         for (CourseEntity course : courseList) {
@@ -139,8 +139,8 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public List<CourseEntity> getCourseList(AccountDetailsDTO dto){
-        UserEntity user = userRepository.findById(dto.getId()).get();
+    public List<CourseEntity> getCourseList(Long id){
+        UserEntity user = userRepository.findById(id).get();
         return user.getTakenCourseList();
     }
 

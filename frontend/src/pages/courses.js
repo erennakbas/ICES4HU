@@ -48,6 +48,7 @@ const Page = () => {
       const response = await axios.get(`${configService.url}/semester/active`);
       setSemesterData(response.data);
       // filter response.data.courseList if instructor is not null and setCourseList
+      console.log(response.data.courseList);
       const courseList = response.data.courseList.filter(
         (course) => course.instructor !== null
       );
@@ -103,10 +104,9 @@ const Page = () => {
     // send selected courses to backend
     const saveCourses = async () => {
       try {
-        const selectedCourses = courses.filter((course) =>
-        coursesSelection.selected.includes(course.id)
-      );
-        const response = await axios.patch(`${configService.url}/users/courselist`, {  values, selectedCourses });
+        const selectedCourses = courses.filter((course) => coursesSelection.selected.includes(course.id));
+        console.log(selectedCourses);
+        const response = await axios.patch(`${configService.url}/users/courselist/${values.id}`, selectedCourses );
         console.log(response.data);
         alert("Courses added to your courses");
         setCourseList(response.data);
